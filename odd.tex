@@ -16,6 +16,8 @@
 \usepackage{pifont}
 \usepackage{todonotes}
 
+\usepackage{relsize}
+
 \usepackage[longnamesfirst,numbers,sort&compress]{natbib}
 
 \newcommand{\Rho}{\mathrm{P}}
@@ -85,7 +87,6 @@
 
 \date{}
 
-
 \newcommand{\colored}[2]{{\color{#1}#2}}
 
 \usepackage{tabularx}
@@ -110,7 +111,7 @@
 
 \section{Introduction}
 
-Let $G$ be a graph.  A (not necessarily proper)\footnote{$varphi$ is a proper colouring of $G$ if $vw\in E(G)$ implies that $\varphi(v)\neq\varphi(w)$.} vertex colouring $\varphi:V(G)\to\N$ is \emph{odd} if the neighbourhood of each non-isolated vertex of $G$ contains a colour that occurs an odd number of times.  More precisely, if $N_G(v):=\{w\in V(G):vw\in E(G)\}$ denotes the neighbourhood of a vertex $v$ in $G$, then $\varphi$ is an odd colouring of $G$ if and only if, for each $v\in V(G)$ with $|N_G(v)|>0$, there exists a colour $\alpha$ such that $|\{w\in N_G(v): \varphi(w)=\alpha\}|$ is odd.
+Let $G$ be a graph.  A (not necessarily proper)\footnote{$\varphi$ is a proper colouring of $G$ if $vw\in E(G)$ implies that $\varphi(v)\neq\varphi(w)$.} vertex colouring $\varphi:V(G)\to\N$ is \emph{odd} if the neighbourhood of each non-isolated vertex of $G$ contains a colour that occurs an odd number of times.  More precisely, if $N_G(v):=\{w\in V(G):vw\in E(G)\}$ denotes the neighbourhood of a vertex $v$ in $G$, then $\varphi$ is an odd colouring of $G$ if and only if, for each $v\in V(G)$ with $|N_G(v)|>0$, there exists a colour $\alpha$ such that $|\{w\in N_G(v): \varphi(w)=\alpha\}|$ is odd.
 
 Odd colourings were recently introduced by \citet{petrusevski.skrekovski:colorings}, who showed that every planar graph $G$ has a proper odd colouring using at most $9$ colours, and conjectured that $5$ colours always suffice.  \citet{caro.petrusevski.ea:remarks} showed that $5$ colours always suffice for outerplanar graphs and showed that $8$ colours always suffice for some special cases of planar graphs.  Building on the work of \citet{caro.petrusevski.ea:remarks}, \citet{petr.portier:odd} showed that every planar graph has an odd colouring using at most $8$ colours.
 
@@ -118,19 +119,19 @@ A minor-closed family of graphs $\mathcal{G}$ is \emph{$d$-degenerate} if every 
 % (Note that any proper minor-closed family of graphs is $d$-degenerate for some fixed $d$.) A vertex of degree zero is called an \emph{isolated} vertex.
 \citet{cranston.lafferty.ea:note} proved that any graph from a $d$-degenerate minor-closed family of graphs has a proper odd colouring using at most $2d+1$ colours.  This result, which has a short and elegant proof, includes outerplanar graphs and, more generally, partial $2$-trees (with $d=2$); planar graphs (with $d=5$); graphs embeddable on surfaces of Euler genus $g$; and graphs of treewidth at most $t$ (with $d=t$).
 
-\citet{cranston.lafferty.ea:note} also consider $1$-planar graphs, which do not form a minor-closed family, and show that any $1$-planar graph\footnote{A graph is $k$-planar if it has an embedding in the plane in which no edge contains a vertex other than its endpoints and each edge is involved in at most $k$ crossings with other edges.} has a proper odd colouring using at most $31$ colours.  They ask if this can be extended to $k$-planar graphs for general $k>1$.  Our main result, \cref{new_result} below, is a more general results for graphs having \emph{product structure} and implies that, for any fixed $k$, any $k$-planar graph has a proper odd colouring using $O(k^5)$ colours.
+\citet{cranston.lafferty.ea:note} also consider $1$-planar graphs, which do not form a minor-closed family, and show that any $1$-planar graph\footnote{A graph is $k$-planar if it has an embedding in the plane in which no edge contains a vertex other than its endpoints and each edge is involved in at most $k$ crossings with other edges.} has a proper odd colouring using at most $31$ colours.  They ask if this can be extended to $k$-planar graphs for general $k>1$.  Our main result, \cref{new_result} below, is a more general results for graphs having \emph{product structure} and implies that any $k$-planar graph has a proper odd colouring using $O(k^5)$ colours.
 %
 % \begin{thm}\label{old_result}
 %   Let $\mathcal{H}$ be a $d$-degenerate minor closed family of graphs and let $H$ be a member of $\mathcal{H}$ with no isolated vertices.  Then $H$ has a proper odd colouring $\varphi:V(H)\to\{1,\ldots,2d+1\}$.
 % \end{thm}
 
-For the two graphs $A$ and $B$, the \emph{strong product} $A\boxtimes B$ of $A$ and $B$ is the graph with vertex set $V(A\boxtimes B):=V(A)\times V(B)$ and that contains an edge with endpoints $(x_1,y_1)$ and $(x_2,y_2)$ if and only if
+For two graphs $A$ and $B$, the \emph{strong product} $A\boxtimes B$ of $A$ and $B$ is the graph with vertex set $V(A\boxtimes B):=V(A)\times V(B)$ and that contains an edge with endpoints $(x_1,y_1)$ and $(x_2,y_2)$ if and only if
 \begin{inparaenum}[(i)]
   \item $x_1x_2\in E(A)$ and $y_1=y_2$;
   \item $x_1=x_2$ and $y_1y_2\in E(B)$; or
   \item $x_1x_2\in E(A)$ and $y_1y_2\in E(B)$.
 \end{inparaenum}
-A \emph{$t$-tree} $H$ is a graph that is either a clique on $t+1$ vertices or that contains a vertex $v$ of degree $t$ whose neighbours form a clique and such that $H-\{v\}$ is a $t$-tree.  The following is the main result in this paper:
+A \emph{$t$-tree} $H$ is a graph that is either a clique on $t+1$ vertices or a graph that contains a vertex $v$ of degree $t$ whose neighbours form a clique and such that $H-\{v\}$ is a $t$-tree.  The following is the main result in this paper:
   
 \begin{thm}\label{new_result}
   Let $H$ be a $t$-tree, let $P$ be a path, and let $G$ be a subgraph of $H\boxtimes P$. Then $G$ has a proper odd colouring $\varphi:V(H)\to\{1,\ldots,6t+3\}$.
@@ -172,24 +173,24 @@ Combining this with \cref{new_result}, we immediate obtain the following corolla
   \begin{compactitem}
     \item To guarantee that $\varphi$ satisfies (\ding{96}), we avoid colours in the set $X:= \{\varphi(w): w\in C_v\setminus\{v\}\}$. By definition, if we choose $\varphi(v)\not\in X$ then the resulting colouring will satisfy Property~(\ding{96}).  In particular, it will ensure that the vertex $(x_i,y_{j-1})$, if it is present in $G$ will continue to satisfy (\ding{96}). Furthermore, unless $v$ is an isolated vertex of $G'$, (\ding{96}) also ensures that $N_{G}(v)$ has a colour that occurs exactly once (because every vertex in $C_v\supseteq N_{G}(v)$ is assigned a unique colour).
 
-    \item To guarantee that $\varphi$ is odd, we consider each vertex $w\in N_{G}(v)$.  If there is exactly one colour $\alpha\in\{1,\ldots,6d+3\}$ that occurs an odd number of times in $N_{G'}(w)$, then we define $Y_{w} := \{\alpha\}$; otherwise we define $Y_{w}:=\emptyset$. Now let $Y:=\bigcup_{w\in N_{G}(v)} Y_{w}$.
+    \item To guarantee that $\varphi$ is odd, we consider each vertex $w\in N_{G}(v)$.  If there is exactly one colour $\alpha\in\{1,\ldots,6t+3\}$ that occurs an odd number of times in $N_{G'}(w)$, then we define $Y_{w} := \{\alpha\}$; otherwise we define $Y_{w}:=\emptyset$. Now let $Y:=\bigcup_{w\in N_{G}(v)} Y_{w}$.
     If we choose $\varphi(v)\not\in Y$ then , for each $w\in N_{G}(v)$ the following holds:
     \begin{compactitem}
       \item If $Y_{w}=\{\alpha\}$ then $\varphi(v)\neq\alpha$. Therefore, the colour $\alpha$ appears an odd number of times in $N_{G}(w)$ since it appears an odd number of times in $N_{G'}(w)=N_G(w)\setminus\{v\}$.
       \item If $Y_{w}=\emptyset$ then either:
       \begin{compactenum}
         \item No colour appears an odd number of times in $N_{G'}(w)$.  In particular, the colour $\varphi(v)$ appears an even number of times in $N_{G'}(w)$, so $\varphi(v)$ appears an odd number of times in $N_G(w)=N_{G'}(w)\cup\{v\}$.
-        \item At least two colours $\alpha$ and $\beta$ each appear an odd number of times in $N_{G'}(w)$.  In this case each colour in $\{\alpha,\beta\}\setminus\{\varphi(v)\}$ appears an odd number of times in $N_{G}(w)$.  In particular, at least one colour that appears an odd number of times in $N_G(w)$.
+        \item At least two colours $\alpha$ and $\beta$ each appear an odd number of times in $N_{G'}(w)$.  In this case each colour in $\{\alpha,\beta\}\setminus\{\varphi(v)\}$ appears an odd number of times in $N_{G}(w)$.  In particular, at least one colour appears an odd number of times in $N_G(w)$.
       \end{compactenum}
     \end{compactitem}
   \end{compactitem}
-  Therefore, by choosing $\varphi(v)\not\in X\cup Y$ we obtain an odd colouring of $G$ that satisifies (\ding{96}).  Each of the sets $X$ and $Y$ has size at most $3d+1$, so $|X\cup Y|\le 6d+2$.  Therefore we can always find a value $\varphi(v)\in \{1,\ldots,6t+3\}\setminus(X\cup Y)$ that completes the colouring of $G$.
+  Therefore, by choosing $\varphi(v)\not\in X\cup Y$ we obtain an odd colouring of $G$ that satisifies (\ding{96}).  Each of the sets $X$ and $Y$ has size at most $3d+1$, so $|X\cup Y|\le 6t+2$.  Therefore we can always find a value $\varphi(v)\in \{1,\ldots,6t+3\}\setminus(X\cup Y)$ that completes the colouring of $G$.
 \end{proof}
 
 
 \section{Remarks}
 
-We note that the proof of \cref{new_result} can easily be modified to prove the following refinement:
+We note that the proof of \cref{new_result} can easily be modified to prove the following generalization:
 
 \begin{thm}\label{new_result2}
   Let $H$ be a $t$-tree, let $B$ be a $d$-degenerate graph of maximum-degree $\Delta$, and let $G$ be a subgraph of $H\boxtimes B$. Then $G$ has a proper odd colouring $\varphi:V(H)\to\{1,\ldots,2((\Delta+1)t + d)+1\}$.
@@ -200,6 +201,11 @@ The proof of \cref{new_result2} is almost identical to the proof of \cref{new_re
    C_{x_i,y_j} := V(G)\cap ((\{x_i\}\cup C_{x_i})\times (y_j\cup N_B(y_j))) \enspace .
 \]
 The vertex $v:=(x_i,y_j)\in V(G)$ is chosen to first maximize $i$, then $j$ is chosen so that $|N_G(v)\cap\{(x_i,y):y\in V(B)\}|\le d$.  The remainder of the proof is identical.
+
+% \cref{new_result2} has an interesting consequence.  The \emph{growth rate} of a graph $G$ is the minimum $\rho$ such that every ball of radius $r>1$ in $G$ contains at most $r^\rho$ vertices.  \citet{krauthgamer.lee:intrinsic} show that, if $G$ has growth rate $\rho$, then $G$ is a subgraph of the $O(c\log c)$-fold strong product $X:=\mathlarger{\mathlarger{\boxtimes}}_{i=1}^{O(c\log c)} P$ of a path with itself.  The graph $X$ has maximum-degree 
+
+
+
 
 %
 % \section{Preliminaries}
