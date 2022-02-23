@@ -96,7 +96,7 @@
 \maketitle
 
 \begin{abstract}
-  The abstract goes here.
+  Todo
 \end{abstract}
 % \end{titlepage}
 
@@ -108,86 +108,90 @@
 
 \section{Introduction}
 
-Let $G$ be a graph and let $\varphi$ be a proper\footnote{$varphi$ is a proper colouring of $G$ if $vw\in E(G)$ implies that $\varphi(v)\neq\varphi(w)$.} vertex colouring of $G$.  Then $\varphi$ is an \emph{odd colouring of $G$} if the neighbourhood of each vertex of $G$ contains a colour that occurs an odd number of times.  More precisely, if $N_G(v):=\{w\in V(G):vw\in E(G)\}$ denote the neighbourhood of a vertex $v$ in $G$, then $\varphi$ is an odd colouring of $G$ if and only if, for each $v\in V(G)$ there exists a colour $\alpha\in S$ such that $|\{w\in N_G(v): \varphi(w)=\alpha\}|$ is odd.  
+Let $G$ be a graph.  A (not necessarily proper)\footnote{$varphi$ is a proper colouring of $G$ if $vw\in E(G)$ implies that $\varphi(v)\neq\varphi(w)$.} vertex colouring $\varphi:V(G)\to\N$ a \emph{odd} if the neighbourhood of each vertex of $G$ contains a colour that occurs an odd number of times.  More precisely, if $N_G(v):=\{w\in V(G):vw\in E(G)\}$ denotes the neighbourhood of a vertex $v$ in $G$, then $\varphi$ is an odd colouring of $G$ if and only if, for each $v\in V(G)$ there exists a colour $\alpha\in S$ such that $|\{w\in N_G(v): \varphi(w)=\alpha\}|$ is odd.
 
-A graph $G$ is \emph{trivial} if it contains at most one vertex.  A minor-closed family of graphs $\mathcal{G}$ is \emph{$d$-degenerate} if every graph in $G$ contains a vertex of degree at most $d$.  (Note that any proper minor-closed family of graphs is $d$-degenerate for some fixed $d$.)  \citet{cranston.lafferty.ea:note} proved the following result:
+A minor-closed family of graphs $\mathcal{G}$ is \emph{$d$-degenerate} if every graph in $G$ contains a vertex of degree at most $d$.  (Note that any proper minor-closed family of graphs is $d$-degenerate for some fixed $d$.)  \citet{cranston.lafferty.ea:note} proved the following result:
 
 \begin{thm}\label{old_result}
-  Let $H$ be a non-trivial connected graph contained in some $d$-degenerate minor-closed family of graphs $\mathcal{H}$.  Then $H$ has a proper odd colouring using at most $2d+1$ colours.
+  Let $\mathcal{H}$ be a $d$-degenerate minor closed family of graphs and let $H$ be a member of $\mathcal{H}$ with no isolated vertices.  Then $H$ has a proper odd colouring $\varphi:V(H)\to\{1,\ldots,2d+1\}$.
 \end{thm}
 
 Using an extension of their argument, we extend \cref{old_result} to graph products.
 
 \begin{thm}\label{new_result}
-  Let $H$ be a graph contained in some $d$-degenerate minor-closed family of graphs $\mathcal{G}$, let $P$ be a path, and let $G$ be a subgraph of $H\boxtimes P$ with no isolated vertices. Then $G$ has a proper odd colouring using at most $6d+3$ colours.
+  Let $H$ be a graph contained in some $d$-degenerate minor-closed family of graphs $\mathcal{G}$, let $P$ be a path, and let $G$ be a subgraph of $H\boxtimes P$ with no isolated vertices. Then $G$ has a proper odd colouring $\varphi:V(H)\to\{1,\ldots,6d+3\}$.
 \end{thm}
 
 \begin{proof}
-  % First, if $P$ has only one vertex then $H\boxtimes P$ is isomorphic to $H$, $G$ is isomorphic to a subgraph of $H$ and, by \cref{old_result}, $G$ has a proper odd colouring using $2d+1$ colours.  Therefore, we may assume that $P:=y_1,\ldots,y_{h}$ has at least two vertices.  
-  Let $x_1,\ldots,x_r$ be the vertices of $H$ ordered so that  $C_i:=N_G(x_i)\cap x_1,\ldots,x_{i-1}$ has size at most $d$, for each $i\in\{1,\ldots,r\}$.  The proof is by induction on the number of vertices of $G$ and will prove the existence of a proper odd colouring $\varphi:V(G)\to\{1,\ldots,6d+3\}$ of $G$ with the following additional property: 
+  % First, if $P$ has only one vertex then $H\boxtimes P$ is isomorphic to $H$, $G$ is isomorphic to a subgraph of $H$ and, by \cref{old_result}, $G$ has a proper odd colouring using $2d+1$ colours.  Therefore, we may assume that $P:=y_1,\ldots,y_{h}$ has at least two vertices.
+  Let $x_1,\ldots,x_r$ be the vertices of $H$ ordered so that  $C_i:=N_G(x_i)\cap\{x_1,\ldots,x_{i-1}\}$ has size at most $d$, for each $i\in\{1,\ldots,r\}$.  The proof is by induction on the number of vertices of $G$ and will prove the existence of a proper odd colouring $\varphi:V(G)\to\{1,\ldots,6d+3\}$ with the following additional property:
   \begin{compactenum}[(P1)]
     \item For each $i,j\in\{1,\ldots,r\}\times \{2,\ldots,h-1\}$, define
     \[
-      C_{i,j}:=V(G)\cap ((\{x_i\}\cup C_i)\times\{y_{j-1}, y_{j},y_{j+1}\})
-      \enspace . 
-    \] 
+      C_{(x_i,y_j)}:=C_{i,j}:=V(G)\cap ((\{x_i\}\cup C_i)\times\{y_{j-1}, y_{j},y_{j+1}\})
+      \enspace .
+    \]
     We will produce a colouring in which all vertices in $C_{i,j}$ receive distinct colours, for each $i,j\in\{1,\ldots,r\}\times\{2,\ldots,h-1\}$.
   \end{compactenum}
-  Note that $N_G((x_i,y_j)) \subseteq C_{i,j}$, so Property~(P1) implies that the colouring $\varphi$ is a proper colouring.
-  
-  If $r=1$, then the proof is easy since, in this case $H\boxtimes P$ is a path, $G$ is a collection of paths and $G$ can easily be coloured with $3=6\cdot 0+3\le 3\cdot d+3$ colours.
-  
-  For each $i\in\{1,\ldots,r\}$ we may assume that there exists at least one $j\in\{1,\ldots,h\}$ such that $(x_i,y_j)\in V(G)$ since, otherwise we may eliminate the vertex $x_i$ from $H$.  Therefore, let $j:=\max\{j\in\{1,\ldots,h\}:(x_r,y_j)\in V(G)\}$ and let $v:=(x_r,v_j)$.
-  
-  Let $G'$ be the graph obtained from $G-\{v\}$ by removing isolated vertices.
-   % be the graph obtained from $G$ by identifying the vertices   $v:=(x_r,y_j)$ and $w:=(x_i,y_j)$. More precisely, $V(G'):=V(G)\setminus\{v\}$ and $E(G'):= E(G-\{v\})\cup \{uw: u\in N_{G}(v)\}$.     
-  By the inductive hypothesis, we can find an appropriate colouring $\varphi$ of $G'$.  We will now extend $\varphi$ to a colouring of $G^-:=G[V(G')\cup\{v\}]$ by first listing colours that we may not choose for $\varphi(v)$:
+  Note that, for any edge $vw$ of $H\boxtimes P$, $v \in C_v$ or $w\in C_w$.  Therefore, Property~(P1) implies that the colouring $\varphi$ is a proper colouring of $H\boxtimes P$ and therefore also a proper colouring of $G$.
+
+  % If $r=1$, then the proof is easy since, in this case $H\boxtimes P$ is a path, $G$ is a collection of paths and $G$ can easily be coloured with $3=6\cdot 0+3\le 3\cdot d+3$ colours.
+  The base case, in which $G$ has no vertices is trivial. Therefore, we may assume that $G$ has at least one vertex and, since $G$ has no isolated vertices, $G$ has at least two vertices.  We also assume that $H$ is the minimal member of $\mathcal{H}$ such that $H\boxtimes P$ contains $G$ as a subgraph.\todo{Mistake right here.}  Let $j:=\max\{j\in\{1,\ldots,h\}:(x_r,y_j)\in V(G)\}$ and let $v:=(x_r,v_j)$.  The minimality of $H$ ensures that $j$ is well-defined.
+
+  \todo[inline]{Something is wrong here.  This proof is only using degeneracy of $H$, which can't work.}
+
+  \todo[inline]{That seemingly innocent assumption about the minimality of $H$ is wrong. When we delete one of these ``redundant'' vertices $x_i$ from $H$ we lose $C_i$, which means that we don't inductively get Property~(P1).
+
+  The proof does work when $H$ is a $t$-tree, though, since then the vertices of $C_i$ form a clique in $H$, so we get can define a property like (P1) that applies to $(t+1)$-cliques in $H$.}
+
+
+  Let $I$ be the set of isolated vertices in $G-\{v\}$, let $G':=G-(\{v\}\cup I)$ and let $G^-:=G-I$.  By the inductive hypothesis, we can find an odd colouring of $G'$ with Property~(P1).  We will now extend $\varphi$ to a colouring of $G^-$ by first listing colours that we may not choose for $\varphi(v)$:
   \begin{compactitem}
-    \item To guarantee Property~(P1), we avoid colours in the set
-      $X:= \{\varphi(w): w\in C_{i,r}\setminus\{v\}\}$.
-      By definition, if we choose $\varphi(v)\not\in X$ then the resulting colouring will satisfy Property~(P2).  As noted above, this ensures that $\varphi$ is a proper colouring of $G^-$.  Furthermore, unless $v$ is an isolated vertex of $G^-$, it also ensures that the $N_{G^-}(v)$ has a colour that occurs an odd number of times (because every vertex in $N_{G^-}(v)$ is assigned a unique colour).
-    \item To guarantee that the colouring is odd, we consider each vertex $w\in N_G(v)$.  If there is exactly one colour $\alpha$ that occurs an odd number of times in $N_{G'}(w)$, then we define $Y_{w} := \{\alpha\}$; otherwise we define $Y_{w}:=\emptyset$. Now let $Y:=\bigcup_{w\in N_{G}(v)} Y_{w}$.  
-    If we choose $\varphi(v)\not\in Y$, then $\varphi$ will be an odd colouring of $G^-$, for each $w\in N_{G^-}(v)$:
+    \item To guarantee that $\varphi$ has Property~(P1), we avoid colours in the set $X:= \{\varphi(w): w\in C_v\setminus\{v\}\}$. By definition, if we choose $\varphi(v)\not\in X$ then the resulting colouring will satisfy Property~(P1).  As noted above, this ensures that $\varphi$ is a proper colouring of $G^-$.  Furthermore, unless $v$ is an isolated vertex of $G^-$, it also ensures that $N_{G^-}(v)$ has a colour that occurs exactly once (because every vertex in $N_{G^-}(v)$ is assigned a unique colour).
+
+    \item To guarantee that $\varphi$ is odd, we consider each vertex $w\in N_{G^-}(v)$.  If there is exactly one colour $\alpha\in\{1,\ldots,6d+3\}$ that occurs an odd number of times in $N_{G'}(w)$, then we define $Y_{w} := \{\alpha\}$; otherwise we define $Y_{w}:=\emptyset$. Now let $Y:=\bigcup_{w\in N_{G^-}(v)} Y_{w}$.
+    If we choose $\varphi(v)\not\in Y $then , for each $w\in N_{G^-}(v)$:
     \begin{compactitem}
       \item If $Y_{w}=\{\alpha\}$ then $\varphi(v)\neq\alpha$, so the colour $\alpha$ appears an odd number of times in $N_{G^-}(w)$.
       \item If $Y_{w}=\emptyset$ then either:
       \begin{compactenum}
-        \item No colour appears an odd number of times in $N_{G'}(w)$ in which case the colour $\varphi(v)$ appears an odd number of times in $N_{G^-}(w)$.
-        \item At least two colours $\alpha$ and $\beta$ each appear an odd number of times in $N_{G'}(w)$ in which case each colour in $\{\alpha,\beta\}\setminus\{\varphi(v)\}$ appears an odd number of times in $N_{G^-}(v')$.
+        \item No colour appears an odd number of times in $N_{G'}(w)$ in which case the colour $\varphi(v)$ appears an odd number of times in $N_{G^-}(w)=N_G(w)$.
+        \item At least two colours $\alpha$ and $\beta$ each appear an odd number of times in $N_{G'}(w)$ in which case each colour in $\{\alpha,\beta\}\setminus\{\varphi(v)\}$ appears an odd number of times in $N_{G^-}(w)=N_G(w)$.
       \end{compactenum}
     \end{compactitem}
   \end{compactitem}
-  Each of the sets $X$ and $Y$ has size at most $3d+1$, so there are at most $6d+2$ colours we must avoid.  Therefore, we can always choose a colour $\varphi(v)\not\in X\cup Y$ provided that we have at least $6d+3$ colours to choose from.  This extends $\varphi$ to a colouring of the graph $G^-$ which includes all vertices of $G$ except for the isolated vertices of $G-\{v\}$.  The isolated vertices of $G^-$ are, of course easily handled since each such vertex $(x_i,y_{j'})$ need only avoid using colours in $\{\varphi(v)\}\cup\{\varphi(w):w\in C_{i,j}\}$.  (These last vertices also take care of the case in which $v$ was an isolated vertex of $G^-$.)
+  Therefore, by choosing $\varphi(v)\not\in X\cup Y$ we obtain a colouring of $G^-$ in which some colour appears an odd number of times in $N_G(w)$ for each vertex $v\in V(G)\setminus (\{v\}\cup I)$.
+  Each of the sets $X$ and $Y$ has size at most $3d+1$, so there are at most $6d+2$ colours that must be avoided when choose $\varphi(v)$.  All that remains is to assign colours to the vertices in $I$.  Tjis is done by  processing the vertices in $I$ in any order. When assigning a colour $\varphi(x)$ to vertex $x\in I$ we use any colour that not yet appear at any vertex in $C_x$. In $G$, each vertex $x\in I$ has degree $1$ so $N_G(x)$ has a colour that appears exactly once.  Finally, since $G$ has no isolated vertices, $N_G(v)$ is non-empty and Property~(P1) ensures that some colour appears exactly once in $N_G(v)$.
 \end{proof}
 
-% 
+%
 % \section{Preliminaries}
-% 
-% 
-% 
-% 
-% 
-% 
+%
+%
+%
+%
+%
+%
 % We will make use of the following trivial observation:
-% 
+%
 % \begin{obs}\label{odd_sum}
 %   Let $r_1,\ldots,r_k$ be integers and let $r:=\sum_{i=1}^k r_i$.  If $r$ is odd then at least one of $r_1,\ldots,r_k$ is odd.
 % \end{obs}
-% 
+%
 % \cref{odd_sum} is useful because it allows us to make use of product colourings.  We say that a colouring $\varphi$ of $G$ is \emph{$\alpha$-odd at $v$} for $G$ if the colour $\alpha$ appears an odd number of times in $N_G(v)$, i.e., $|\{w\in N_G(v): \varphi(w)=\alpha\}|\equiv 1\pmod 2$.  We say that $\varphi$ is \emph{odd at $v$} if $\varphi$ is $\alpha$-odd at $v$ for some colour $\alpha$.
-% 
+%
 % \begin{obs}\label{product_colouring}
 %   Let $G$ be a graph and let $\varphi,\rho$ be two colourings of $G$ such that at least one of $\varphi$ or $\rho$ is odd at $v$.  Then the product colouring $\psi$ defined as $\psi(v):=(\varphi(v),\rho(v))$ is odd at $v$.
 % \end{obs}
-% 
+%
 % \begin{proof}
 %   Without loss of generality, assume that $\varphi$ is $\alpha$-odd at $v$. In other words, $|\{w\in N_G(v):\varphi(w)=\alpha\}|$ is odd.  Therefore, by \cref{odd_sum}, there exists $\beta$ such that $|\{w\in N_G(v): \psi(w)=(\alpha,\beta)\}|$ is odd.  Therefore $\psi$ is odd at $v$.
 % \end{proof}
-% 
+%
 % For a graph $G$ and a set $X$, $G[X]$ is the vertex-induced subgraph with $V(G[X]):=V(G)\cap X$ and $E(G[X]):=\{vw\in E(G):v,w\in X\}$.  For two sets $X$ and $Y$, $G[X,Y]$ is the graph with $V(G[X,Y]):= V(G)\cap (X\cup Y)$ and $E(G):=\{vw\in v\in X, w\in Y\}$.
-% 
+%
 % A \emph{layering} of a graph $G$ is partition of $V(G)$ into a sequence of sets $(L_1,\ldots,L_h)$ such that, for each edge $vw\in E(G)$, $v\in L_i$ and $w\in L_j$ implies that $|i-j|\le 1$. For convenience, we will use the convention that $L_0:=L_{h+1}:=\emptyset$ and we will let $\ell(v)$ be defined so that $v\in L_{\ell(v)}$.
-% 
+%
 % \begin{lem}
 %   Let $G$ be a graph, let $L_1,\ldots,L_h$ be a layering of $G$, and let $\varphi$, $\rho$, and $\delta$ be colourings of $G$ such that, for each $i\in\{1,\ldots,h\}$ and each $v\in L_i$,
 %   \begin{compactenum}
@@ -197,30 +201,30 @@ Using an extension of their argument, we extend \cref{old_result} to graph produ
 %   \end{compactenum}
 %   Then the product colouring $\psi$ defined as $\psi(v):=(\varphi(v),\rho(v),\delta(v),\ell(v)\bmod 3)$ is an odd colouring of $G$.
 % \end{lem}
-% 
-% \begin{proof} 
-%   If $\varphi$ is $\alpha$-odd at $v$ for $G[L_i]$, then 
+%
+% \begin{proof}
+%   If $\varphi$ is $\alpha$-odd at $v$ for $G[L_i]$, then
 %   \[
 %        |\{w\in N_G(v):\varphi(w)=\alpha,\, w\in L_{i}\}|=|\{w\in N_G(v):\varphi(w)=\alpha,\, \ell(v)=i\bmod 3\}|
-%   \] 
+%   \]
 %   is odd.  Therefore, by \cref{product_colouring}, $\psi$ is odd at $v$.
-% 
+%
 %   Similarly, if $\rho$ is $\beta$-odd at $v$ for $G[L_{i},L_{i-1}]$ then $|\{w\in N_G(v):\rho(w)=\beta,\,\ell(v)=(i-1)\bmod 3\}|$ is odd.  So, by  \cref{product_colouring}, $\psi$ is odd at $v$.
-% 
+%
 %   Again, similarly, if $\delta$ is $\gamma$-odd at $v$ for $G[L_{i},L_{i+1}]$ then $|w\in N_G(v):\delta(v)=\gamma,\ell(v)=(i+1)\bmod 3\}|$ is odd.  So, by \cref{product_colouring}, $\psi$ is odd at $v$.
-% 
-%   Therefore, $\psi$ is odd 
+%
+%   Therefore, $\psi$ is odd
 % \end{proof}
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
-% 
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
 
 \bibliographystyle{plainurlnat}
 \bibliography{odd}
