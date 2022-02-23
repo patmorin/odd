@@ -152,39 +152,42 @@ Combining this with \cref{new_result}, we immediate obtain the following corolla
 \section{Proof of \cref{new_result}}
 
 \begin{proof}[Proof of \cref{new_result}]
-  Let $y_1,\ldots,y_h$ be the vertices of $P$, in order.  To avoid a boring edge case, we extend $P$ by one vertex in each direction, so that the vertices $y_0$ and $y_{h+1}$ are defined.  Let $x_1,\ldots,x_r$ be the vertices of $H$ ordered so that $x_1,\ldots,x_{t}$ is a clique and, for each $i\in\{t+1,\ldots,r\}$, $C_i:=N_G(x_i)\cap\{x_1,\ldots,x_{i-1}\}$ is a clique of size $t$.  The proof is by induction on the number of vertices of $G$ (which may be disconnected and have isolated vertices) and will prove the existence of a proper odd colouring $\varphi:V(G)\to\{1,\ldots,6t+3\}$ with the following additional property:
+  Let $y_1,\ldots,y_h$ be the vertices of $P$, in order.  To avoid a boring edge case, we extend $P$ by one vertex in each direction, so that the vertices $y_0$ and $y_{h+1}$ are defined.  Let $x_1,\ldots,x_r$ be the vertices of $H$ ordered so that $x_1,\ldots,x_{t}$ is a clique and, for each $i\in\{t+1,\ldots,r\}$, $C_i:=N_H(x_i)\cap\{x_1,\ldots,x_{i-1}\}$ is a clique of size $t$.  The proof is by induction on the number of vertices of $G$ (which may be disconnected and have isolated vertices) and will prove the existence of a proper odd colouring $\varphi:V(G)\to\{1,\ldots,6t+3\}$ with the following additional property:
   \begin{compactitem}[(\ding{96})]
     \item For each $i,j\in\{1,\ldots,r\}\times \{1,\ldots,h\}$, define
     \[
-      C_{(x_i,y_j)}:=C_{i,j}:=V(G)\cap ((\{x_i\}\cup C_i)\times\{y_{j-1}, y_{j},y_{j+1}\})
+      C_{(x_i,y_j)}:=C_{i,j}:=V(G)\cap \left((C_i\times\{y_{j-1}, y_{j},y_{j+1}\}) \cup \{(x_i,y_{j-1})\}\right)
       \enspace .
     \]
     We will produce a colouring in which all vertices in $C_{i,j}$ receive distinct colours, for each $i,j\in\{1,\ldots,r\}\times\{1,\ldots,h\}$.
   \end{compactitem}
-  Note that, for any edge $vw$ of $H\boxtimes P$, $v \in C_v$ or $w\in C_w$.  Therefore, Property~(P1) implies that the colouring $\varphi$ is a proper colouring of $H\boxtimes P$ and therefore also a proper colouring of $G$.
+  Note that, for any edge $vw$ of $G$, $v \in C_w$ or $w\in C_v$.  Therefore, (\ding{96}) implies that the colouring $\varphi$ is a proper colouring of $G$.
 
 
   % We first dispense with some easy cases. \todo{Is this paragraph needed? No.}  If $H$ has $t+1$ vertices, then we can easily find a distance-$2$ colouring $\varphi$ of $H\boxtimes P$, using $3t+3\le 6t+3$ colours. In particular, we can begin with any proper $(t+1)$-colouring $\rho:V(H)\to\{0,\ldots,t\}$ of $H$ and define $\varphi(x_i,y_j):=1+((t+1)j + \rho(x_i))\bmod (3t+3)$.  This colouring satifies (\ding{96}) and, for any $v\in V(H\boxtimes P)$ each vertex in $N_{H\boxtimes P}(v)$ receives a distinct colour.  Therefore, for any non-isolated vertex $v\in V(G)$, $N_G(v)$ contains a vertex whose colour is unique, so $\rho$ is an odd colouring of $G$.
 
   % If $r=1$, then the proof is easy since, in this case $H\boxtimes P$ is a path, $G$ is a collection of paths and $G$ can easily be coloured with $3=6\cdot 0+3\le 3\cdot d+3$ colours.
-  The base case, in which $G$ has no vertices, is trivial. Therefore, we may assume that $G$ has at least one vertex.  Let $(i,j)\in\{1,\ldots,r\}\times\{1,\ldots,h\}$ be the lexicographically largest pair such that $(x_i,y_j)\in V(G)$.  Since $G$ has at least one vertex, $(i,j)$ is well-defined.  Let $v:=(x_i,y_j)$ and observe that the degree of $v$ in $G$ is at most $3t+1$. Indeed, by the maximality of $(i,j)$,  $N_G(v)\subseteq C_v\setminus\{v,x_{i,j+1}\}$.
+  The base case, in which $G$ has no vertices, is trivial. Therefore, we may assume that $G$ has at least one vertex.  Let $(i,j)\in\{1,\ldots,r\}\times\{1,\ldots,h\}$ be the lexicographically largest pair such that $(x_i,y_j)\in V(G)$.  Since $G$ has at least one vertex, $(i,j)$ is well-defined.  Let $v:=(x_i,y_j)$ and observe that the degree of $v$ in $G$ is at most $3t+1$. Indeed, by the maximality of $(i,j)$,  $N_G(v)\subseteq C_v$.
 
   Consider the graph $G':= G-\{v\}$.  By the inductive hypothesis, we can find an odd colouring $\varphi$ of $G'$ that satisfies (\ding{96}).  We will now extend $\varphi$ to a colouring of $G$ by first listing colours that we may not choose for $\varphi(v)$:
-  \begin{compactitem}
-    \item To guarantee that $\varphi$ satisfies (\ding{96}), we avoid colours in the set $X:= \{\varphi(w): w\in C_v\setminus\{v\}\}$. By definition, if we choose $\varphi(v)\not\in X$ then the resulting colouring will satisfy Property~(\ding{96}).  In particular, it will ensure that the vertex $(x_i,y_{j-1})$, if it is present in $G$ will continue to satisfy (\ding{96}). Furthermore, unless $v$ is an isolated vertex of $G'$, (\ding{96}) also ensures that $N_{G}(v)$ has a colour that occurs exactly once (because every vertex in $C_v\supseteq N_{G}(v)$ is assigned a unique colour).
+  \begin{itemize}
+    \item To guarantee that $\varphi$ satisfies (\ding{96}), we avoid colours in the set $X:= \{\varphi(w): w\in C_{v}\}$.
+    By definition, if we choose $\varphi(v)\not\in X$ then the resulting colouring will satisfy (\ding{96}).  In particular, choosing $\varphi(v)\not\in X$ ensures that $v$ satisfies (\ding{96}). Furthermore, by the maximality of $(i,j)$, $v\not\in C_w$ for any $w\in V(G)$ so colouring $v$ cannot violate (\ding{96}) for any $w\in V(G)\setminus\{v\}$.
+    
+    Furthermore, if $v$ is not an isolated vertex of $G$ then (\ding{96}) ensures that some colour occurs exactly once in $N_G(v)$. Thus we need only ensure that we choose $\varphi(v)$ so that some colour appears an odd number of times in $N_G(w)$ for each $w\in N_G(v)$, which is what we do next.
 
     \item To guarantee that $\varphi$ is odd, we consider each vertex $w\in N_{G}(v)$.  If there is exactly one colour $\alpha\in\{1,\ldots,6t+3\}$ that occurs an odd number of times in $N_{G'}(w)$, then we define $Y_{w} := \{\alpha\}$; otherwise we define $Y_{w}:=\emptyset$. Now let $Y:=\bigcup_{w\in N_{G}(v)} Y_{w}$.
     If we choose $\varphi(v)\not\in Y$ then , for each $w\in N_{G}(v)$ the following holds:
-    \begin{compactitem}
+    \begin{itemize}
       \item If $Y_{w}=\{\alpha\}$ then $\varphi(v)\neq\alpha$. Therefore, the colour $\alpha$ appears an odd number of times in $N_{G}(w)$ since it appears an odd number of times in $N_{G'}(w)=N_G(w)\setminus\{v\}$.
       \item If $Y_{w}=\emptyset$ then either:
-      \begin{compactenum}
-        \item No colour appears an odd number of times in $N_{G'}(w)$.  In particular, the colour $\varphi(v)$ appears an even number of times in $N_{G'}(w)$, so $\varphi(v)$ appears an odd number of times in $N_G(w)=N_{G'}(w)\cup\{v\}$.
-        \item At least two colours $\alpha$ and $\beta$ each appear an odd number of times in $N_{G'}(w)$.  In this case each colour in $\{\alpha,\beta\}\setminus\{\varphi(v)\}$ appears an odd number of times in $N_{G}(w)$.  In particular, at least one colour appears an odd number of times in $N_G(w)$.
-      \end{compactenum}
-    \end{compactitem}
-  \end{compactitem}
-  Therefore, by choosing $\varphi(v)\not\in X\cup Y$ we obtain an odd colouring of $G$ that satisifies (\ding{96}).  Each of the sets $X$ and $Y$ has size at most $3d+1$, so $|X\cup Y|\le 6t+2$.  Therefore we can always find a value $\varphi(v)\in \{1,\ldots,6t+3\}\setminus(X\cup Y)$ that completes the colouring of $G$.
+      \begin{itemize}
+        \item No colour appears an odd number of times in $N_{G'}(w)$.  Therefore the colour $\varphi(v)$ appears an even number of times in $N_{G'}(w)$, so $\varphi(v)$ appears an odd number of times in $N_G(w)=N_{G'}(w)\cup\{v\}$.
+        \item At least two colours $\alpha$ and $\beta$ each appear an odd number of times in $N_{G'}(w)$.  Therefore each colour in $\{\alpha,\beta\}\setminus\{\varphi(v)\}$ appears an odd number of times in $N_{G}(w)$.  In particular, at least one of $\alpha$ or $\beta$ appears an odd number of times in $N_G(w)$.
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+  Therefore, by choosing $\varphi(v)\not\in X\cup Y$ we obtain an odd colouring of $G$ that satisifies (\ding{96}).  The sets $X$ and $Y$ each have size at most $3t+1$, so $|X\cup Y|\le 6t+2$.  Therefore we can always find a value $\varphi(v)\in \{1,\ldots,6t+3\}\setminus(X\cup Y)$ that completes the colouring of $G$.
 \end{proof}
 
 
@@ -196,11 +199,12 @@ We note that the proof of \cref{new_result} can easily be modified to prove the 
   Let $H$ be a $t$-tree, let $B$ be a $d$-degenerate graph of maximum-degree $\Delta$, and let $G$ be a subgraph of $H\boxtimes B$. Then $G$ has a proper odd colouring $\varphi:V(H)\to\{1,\ldots,2((\Delta+1)t + d)+1\}$.
 \end{thm}
 
-The proof of \cref{new_result2} is almost identical to the proof of \cref{new_result} except for the definition of the $C_{x_i,y_j}$, which now becomes
+The proof of \cref{new_result2} is almost identical to the proof of \cref{new_result} except for the following modifications:  Let $y_1,\ldots,y_h$ be an ordering of $V(B)$ for which $|N_B(y_j)\cap\{y_1,\ldots,y_{j}\}|\le d$ for each $j\in\{1,\ldots,h\}$ and let $C_{y_j}:=N_B(y_j)\cap\{y_1,\ldots,y_{j}\}$.  Then the definition of $C_{x_i,y_j}$ becomes
 \[
-   C_{x_i,y_j} := V(G)\cap ((\{x_i\}\cup C_{x_i})\times (y_j\cup N_B(y_j))) \enspace .
+   C_{x_i,y_j} := V(G)\cap \left( (C_{x_i}\times (\{y_j\}\cup N_B(y_j)))
+       \cup \{(x_i,y): y \in C_{y_j}\}  \right) \enspace .
 \]
-The vertex $v:=(x_i,y_j)\in V(G)$ is chosen to first maximize $i$, then $j$ is chosen so that $|N_G(v)\cap\{(x_i,y):y\in V(B)\}|\le d$.  The remainder of the proof is identical.
+As before the vertex $v:=(x_i,y_j)\in V(G)$ is chosen so that $(i,j)$ is lexicographically maximum.  With this choice of $v$,  $N_G(v)\subseteq C_v$, so $|N_G(v)|\le (\Delta+1)t+d$. Since $|X|\le |C_v|$ and $|Y|\le |N_G(v)|$, this means there are at most $2((\Delta+1)t+d)$ colours that must be avoided when choosing $\varphi(v)$, so $2((\Delta+1)t+d)+1$ colours are sufficient. \Cref{new_result} is a consequence of \cref{new_result2} because a path $P$ is a graph with maximum degree $\Delta=2$ and degeneracy $d=1$.
 
 % \cref{new_result2} has an interesting consequence.  The \emph{growth rate} of a graph $G$ is the minimum $\rho$ such that every ball of radius $r>1$ in $G$ contains at most $r^\rho$ vertices.  \citet{krauthgamer.lee:intrinsic} show that, if $G$ has growth rate $\rho$, then $G$ is a subgraph of the $O(c\log c)$-fold strong product $X:=\mathlarger{\mathlarger{\boxtimes}}_{i=1}^{O(c\log c)} P$ of a path with itself.  The graph $X$ has maximum-degree 
 
