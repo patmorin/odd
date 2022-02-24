@@ -134,7 +134,7 @@ For two graphs $A$ and $B$, the \emph{strong product} $A\boxtimes B$ of $A$ and 
 A \emph{$t$-tree} $H$ is a graph that is either a clique on $t+1$ vertices or a graph that contains a vertex $v$ of degree $t$ whose neighbours form a clique and such that $H-\{v\}$ is a $t$-tree.  The following is the main result in this paper:
 
 \begin{thm}\label{new_result}
-  Let $H$ be a $t$-tree, let $P$ be a path, and let $G$ be a subgraph of $H\boxtimes P$. Then $G$ has a proper odd colouring $\varphi:V(G)\to\{1,\ldots,6t+3\}$.
+  Let $H$ be a $t$-tree, let $P$ be a path, and let $G$ be a subgraph of $H\boxtimes P$. Then $G$ has a proper odd colouring $\varphi:V(G)\to\{1,\ldots,8t+4\}$.
 \end{thm}
 
 A number of graph families are known to exhibit so called \emph{product structure} like that required of the graph $G$ in \cref{new_result}.  For example, for every planar graph $G$ there exists a $6$-tree $H$ and a path $P$ such that $G$ is isomorphic to a subgraph of $H\boxtimes P$ \cite{ueckerdt.wood.ea:improved}.  Similar results hold (with constants other than $6$) for graphs of bounded Euler genus, apex-minor free graphs, and bounded-degree graphs from proper-minor-closed families \cite{dujmovic.joret.ea:planar,dujmovic.esperet.ea:clustered}.  Most relevant for the current discussion is the following theorem of \citet{dujmovic.morin.ea:structure}:
@@ -152,32 +152,44 @@ Combining this with \cref{new_result}, we immediate obtain the following corolla
 \section{Proof of \cref{new_result}}
 
 \begin{proof}[Proof of \cref{new_result}]
-  Let $y_1,\ldots,y_h$ be the vertices of $P$, in order.  To avoid a boring edge case, we extend $P$ by one vertex in each direction, so that the vertices $y_0$ and $y_{h+1}$ are defined.  Let $x_1,\ldots,x_r$ be the vertices of $H$ ordered so that $x_1,\ldots,x_{t}$ is a clique and, for each $i\in\{t+1,\ldots,r\}$, $C_{x_i}:=N_G(x_i)\cap\{x_1,\ldots,x_{i}\}$ is a clique of size $t$.  The proof is by induction on the number of vertices of $G$ and will prove the existence of a proper odd colouring $\varphi:V(G)\to\{1,\ldots,6t+3\}$ with the following additional property:
+  Let $y_1,\ldots,y_h$ be the vertices of $P$, in order.  To avoid a boring edge case, we extend $P$ by one vertex in each direction, so that the vertices $y_0$ and $y_{h+1}$ are defined.  
+  
+  Let $x_1,\ldots,x_r$ be the vertices of $H$ ordered so that $x_1,\ldots,x_{t}$ is a clique and, for each $i\in\{t+1,\ldots,r\}$, $C_{x_i}:=N_G(x_i)\cap\{x_1,\ldots,x_{i}\}$ is a clique of size $t$.  
+  We will make crucial use of the following well-known property of $t$-trees:\footnote{(\ding{74}) follows from the fact that $S:=C_{x_i}\cup\{x_i\}$ separates $\{x_1,\ldots,x_i\}\setminus S$ from $x_{i'}$.  In the language of rooted tree-decompositions, the node whose bag contains $S$ is an ancestor of all nodes whose bags contains $x_{i'}$.}
+  \begin{compactitem}[(\ding{74})]
+    \item If $1\le i \le i'\le r$ and $x_i \in C_{x_{i'}}$ then $C_{x_i}\supseteq C_{x_{i'}}\cap\{x_1,\ldots,x_{i-1}\}$.
+  \end{compactitem}
+  
+  With this setup out of the way, we can proceed with the proof, which is by induction on the number of vertices of $G$.  We will prove the following stronger statement:  There exists a proper odd colouring $\varphi:V(G)\to\{1,\ldots,8t+4\}$ of $G$ that satisifies the following additional condition:
   \begin{compactitem}[(\ding{96})]
-    \item For each $i,j\in\{1,\ldots,r\}\times \{1,\ldots,h\}$, define
+    \item For each $(x_i,y_j)\in V(H\boxtimes P)$, define
     \[
-      C_{(x_i,y_j)}:=V(G)\cap ((C_{x_i}\times\{y_{j-1}, y_{j},y_{j+1}\})\cup\{(x_i,y_{j-1})\})
+      C_{(x_i,y_j)}:=V(G)\cap \left(\left(C_{x_i}\times\{y_{j-1}, y_{j},y_{j+1}\}\right)\cup\{(x_i,y_i),(x_i,y_{j-1})\}\right)
       \enspace .
     \]
-    We will produce a colouring in which all vertices in $C_{(x_i,y_j)}\cup\{(x_i,y_j)\}$ receive distinct colours, for each $i,j\in\{1,\ldots,r\}\times\{1,\ldots,h\}$.
+    Then, for each $v\in V(H\boxtimes P)$ the vertices in $C_v$ receive distinct colours, i.e., $\varphi(u)\neq \varphi(w)$ for each distinct $u,w\in C_v$.
   \end{compactitem}
-  Note that, for any edge $vw$ of $G$, $v \in C_w$ or $w\in C_v$.  Therefore, (\ding{96}) implies that the colouring $\varphi$ is a proper colouring of $G$.
+  Note that, for any edge $vw$ of $G$, $v,w \in C_w$ or $v,w\in C_v$.  Therefore, (\ding{96}) implies that the colouring $\varphi$ is a proper colouring of $G$.
 
 
-  % We first dispense with some easy cases. \todo{Is this paragraph needed? No.}  If $H$ has $t+1$ vertices, then we can easily find a distance-$2$ colouring $\varphi$ of $H\boxtimes P$, using $3t+3\le 6t+3$ colours. In particular, we can begin with any proper $(t+1)$-colouring $\rho:V(H)\to\{0,\ldots,t\}$ of $H$ and define $\varphi(x_i,y_j):=1+((t+1)j + \rho(x_i))\bmod (3t+3)$.  This colouring satifies (\ding{96}) and, for any $v\in V(H\boxtimes P)$ each vertex in $N_{H\boxtimes P}(v)$ receives a distinct colour.  Therefore, for any non-isolated vertex $v\in V(G)$, $N_G(v)$ contains a vertex whose colour is unique, so $\rho$ is an odd colouring of $G$.
+  % We first dispense with some easy cases. \todo{Is this paragraph needed? No.}  If $H$ has $t+1$ vertices, then we can easily find a distance-$2$ colouring $\varphi$ of $H\boxtimes P$, using $3t+3\le 8t+4$ colours. In particular, we can begin with any proper $(t+1)$-colouring $\rho:V(H)\to\{0,\ldots,t\}$ of $H$ and define $\varphi(x_i,y_j):=1+((t+1)j + \rho(x_i))\bmod (3t+3)$.  This colouring satifies (\ding{96}) and, for any $v\in V(H\boxtimes P)$ each vertex in $N_{H\boxtimes P}(v)$ receives a distinct colour.  Therefore, for any non-isolated vertex $v\in V(G)$, $N_G(v)$ contains a vertex whose colour is unique, so $\rho$ is an odd colouring of $G$.
 
   % If $r=1$, then the proof is easy since, in this case $H\boxtimes P$ is a path, $G$ is a collection of paths and $G$ can easily be coloured with $3=6\cdot 0+3\le 3\cdot d+3$ colours.
   The base case, in which $G$ has no vertices, is trivial. Therefore, we may assume that $G$ has at least one vertex.  Let $(i,j)\in\{1,\ldots,r\}\times\{1,\ldots,h\}$ be the lexicographically largest pair such that $(x_i,y_j)\in V(G)$.  Since $G$ has at least one vertex, $(i,j)$ is well-defined.  Let $v:=(x_i,y_j)$ and observe that the degree of $v$ in $G$ is at most $3t+1$. Indeed, by the maximality of $(i,j)$,  $N_G(v)\subseteq C_v$.
 
   Consider the graph $G':= G-\{v\}$.  By the inductive hypothesis, we can find an odd colouring $\varphi$ of $G'$ that satisfies (\ding{96}).  We will now extend $\varphi$ to a colouring of $G$ by first listing colours that we may not choose for $\varphi(v)$:
   \begin{itemize}
-    \item To guarantee that $\varphi$ satisfies (\ding{96}), we avoid colours in the set $X:= \{\varphi(w): w\in C_{v}\}$.
-    By definition, if we choose $\varphi(v)\not\in X$ then the resulting colouring will satisfy (\ding{96}).  In particular, choosing $\varphi(v)\not\in X$ ensures that $v$ satisfies (\ding{96}).
-    Furthermore, by the maximality of $(i,j)$, $v\not\in C_w$ for any $w\in V(G)$ so colouring $v$ cannot violate (\ding{96}) for any $w\in V(G)\setminus\{v\}$. 
+    \item To guarantee that $\varphi$ satisfies (\ding{96}), observe that assigning a colour to $v$ can only violate (\ding{96}) if it does so for some vertex $(x_{i'},y_{j'})\in V(H\boxtimes P)$ with $v\in C_{(x_{i'},y_{j'})}$.  By (\ding{74}) and the maximality of $(i,j)$, if $v\in C_{(x_{i'},y_{j'})}$ then $|j-j'|\le 1$ and $C_{x_{i}}\cup\{x_i\}\supseteq C_{x_{i'}}$.  Therefore,
+    \[
+        C_{(x_{i'},y_{j'})}\setminus\{v\}\subseteq  
+          \left(C_{x_i} \times \{y_{j-2},y_{j-1},y_j,y_{j+1},y_{j+2}\}\right)
+          \cup \{(x_i,y_{j-2}),(x_i,y_{j-1})\} =: R \enspace .
+    \]
+    Therefore, in order to satisfy (\ding{96}) it is sufficient to choose $\varphi(v)$ so that $\varphi(v)\neq\varphi(w)$ for each $w\in R$.  Let $X:=\{\varphi(w): w\in R\}$ and observe that $|X|\le |R| \le 5t+2$.  Thus, if we choose $\varphi(v)\not\in X$ then the resulting colouring of $G$ will satisfy (\ding{96}).
 
-    Furthermore, if $v$ is not an isolated vertex of $G$ then (\ding{96}) ensures that some colour occurs exactly once in $N_G(v)$. Thus we need only ensure that we choose $\varphi(v)$ so that some colour appears an odd number of times in $N_G(w)$ for each $w\in N_G(v)$, which is what we do next.
+    Furthermore, if $v$ is not an isolated vertex of $G$ then (\ding{96}) ensures that some colour occurs exactly once in $N_G(v)$. Thus we need only choose some $\varphi(v)\not\in X$ in such a way that some colour appears an odd number of times in $N_G(w)$ for each $w\in N_G(v)$, which is what we do next.
 
-    \item To guarantee that $\varphi$ is odd, we consider each vertex $w\in N_{G}(v)$.  If there is exactly one colour $\alpha\in\{1,\ldots,6t+3\}$ that occurs an odd number of times in $N_{G'}(w)$, then we define $Y_{w} := \{\alpha\}$; otherwise we define $Y_{w}:=\emptyset$. Now let $Y:=\bigcup_{w\in N_{G}(v)} Y_{w}$.
+    \item To guarantee that $\varphi$ is an odd colouring of $G$, we consider each vertex $w\in N_{G}(v)$.  If there is exactly one colour $\alpha\in\{1,\ldots,8t+4\}$ that occurs an odd number of times in $N_{G'}(w)$, then we define $Y_{w} := \{\alpha\}$; otherwise we define $Y_{w}:=\emptyset$. Now let $Y:=\bigcup_{w\in N_{G}(v)} Y_{w}$ and observe that $|Y|\le |N_G(v)|\le |C_v|\le 3t+1$.
     If we choose $\varphi(v)\not\in Y$ then , for each $w\in N_{G}(v)$ the following holds:
     \begin{itemize}
       \item If $Y_{w}=\{\alpha\}$ then $\varphi(v)\neq\alpha$. Therefore, the colour $\alpha$ appears an odd number of times in $N_{G}(w)$ since it appears an odd number of times in $N_{G'}(w)=N_G(w)\setminus\{v\}$.
@@ -188,26 +200,45 @@ Combining this with \cref{new_result}, we immediate obtain the following corolla
       \end{itemize}
     \end{itemize}
   \end{itemize}
-  Therefore, by choosing $\varphi(v)\not\in X\cup Y$ we obtain an odd colouring of $G$ that satisifies (\ding{96}).  The sets $X$ and $Y$ each have size at most $3t+1$, so $|X\cup Y|\le 6t+2$.  Therefore we can always find a value $\varphi(v)\in \{1,\ldots,6t+3\}\setminus(X\cup Y)$ that completes the colouring of $G$.
+  Therefore, by choosing $\varphi(v)\not\in X\cup Y$ we obtain an odd colouring of $G$ that satisifies (\ding{96}).  Since $|X\cup Y|\le |X|+|Y|\le 8t+3$, we can always find a value $\varphi(v)\in \{1,\ldots,8t+4\}\setminus(X\cup Y)$ that completes the colouring of $G$.
 \end{proof}
 
 
 \section{Remarks}
 
-Our proof of \cref{new_result} is inspired by the proof of the result on $d$-degenerate minor-closed families of \citet{cranston.lafferty.ea:note}, which is an inductive proof that involves contracting an edge incident to a vertex of degree at most $d$.  However, since the class of graphs with product structure is not minor-closed we can not use edge contractions. Instead, we use vertex deletion along with condition (\ding{96}) to achieve a similar effect.
+Our proof of \cref{new_result} is inspired by the proof of the result on $d$-degenerate minor-closed families of \citet{cranston.lafferty.ea:note}, which is an inductive proof that involves contracting an edge $wv$ incident to a vertex $v$ of degree at most $d$.  The contraction of this edge (as opposed to the deletion of $v$) is crucial to ensuring that $N_G(v)$ has a colour (namely $\varphi(w)$) that appears an odd number of times.  However, since the class of graphs with product structure is not minor-closed we can not use edge contractions. Instead, we use vertex deletion along with condition (\ding{96}) to achieve a similar effect.  
 
-We conclude by noting that the proof of \cref{new_result} can easily be modified to prove the following refinement:
+One might hope that \cref{new_result} could be generalized to the setting in which $H$ belongs to some $t$-degenerate minor-closed family of graphs.  However, bounding the size of the set $X$ required to maintain (\ding{96}) when choosing $\varphi(v)$ relies critically on (\ding{74}), which is a property of graphs of treewidth $t$ that is not true for all $t$-degenerate minor-closed graph families.
+
+A number of product structure theorems characterize graphs as subgraphs of $H\boxtimes P\boxtimes K_{\ell}$ where $H$ is a $t$-tree, $P$ is a path, and $K_\ell$ is a complete graph of order $\ell$.  Since $H\boxtimes P\boxtimes K_{\ell}$ is isomorphic to $H\boxtimes K_\ell\boxtimes P$ and $H\boxtimes K_\ell$ is a $(\ell(t+1)-1)$-tree, \cref{new_result} immediately implies that these graphs have odd colourings using $8\ell t+8\ell-4$ colours.  It is possible to improve this slightly by redoing the proof \cref{new_result}.  Doing this carefully, one finds that the sizes of the sets $X$ and $Y$ can be bounded by $|X|\le 5\ell t + 3\ell-1$ and $|Y|\le 3\ell t + 2\ell -1$ so that $|X\cup Y|\le 8\ell t + 5\ell -2$. Therefore any subgraph of $H\boxtimes P\boxtimes K_\ell$ has an odd coloring using at most $8\ell t + 5\ell -1$ colours. 
+
+Perhaps a more interesting generalization comes by replacing $P$ by some graph of bounded degree.  In this case, we obtain the following variant on \cref{new_result}
 
 \begin{thm}\label{new_result2}
-  Let $H$ be a $t$-tree, let $B$ be a $d$-degenerate\footnote{A graph $G$ is $d$-degenerate if every subgraph of $G$ contains a vertex of degree at most $d$.} graph of maximum-degree $\Delta$, and let $G$ be a subgraph of $H\boxtimes B$. Then $G$ has a proper odd colouring $\varphi:V(H)\to\{1,\ldots,2((\Delta+1)t + d)+1\}$.
+  Let $H$ be a $t$-tree, let $I$ be a graph of maximum-degree $\Delta$, and let $G$ be a subgraph of $H\boxtimes I$.  The $G$ has an odd colouring using $O(\Delta^2 t)$ colours.
 \end{thm}
 
-The proof of \cref{new_result2} is almost identical to the proof of \cref{new_result} except for the following modifications:  Let $y_1,\ldots,y_h$ be an ordering of $V(B)$ for which $|N_B(y_j)\cap\{y_1,\ldots,y_{j}\}|\le d$ for each $j\in\{1,\ldots,h\}$ and let $C_{y_j}:=N_B(y_j)\cap\{y_1,\ldots,y_{j}\}$.  Then the definition of $C_{x_i,y_j}$ becomes
+The proof of \cref{new_result2} follows the same general strategy used in the proof of \cref{new_result} except that the vertices $y_1,\ldots,y_h$ are the vertices of $I$ is no particular order.  In this setting, the set $C_{(x_i,y_i)}$ is defined as
 \[
-   C_{x_i,y_j} := V(G)\cap \left( (C_{x_i}\times (\{y_j\}\cup N_B(y_j)))
-       \cup \{(x_i,y): y \in C_{y_j}\}  \right) \enspace .
+    C_{(x_i,y_i)}:=(\{x_i\}\cup C_{x_i})\boxtimes (\{y_j\}\cup N_I(y_j)) \enspace .
 \]
-As before the vertex $v:=(x_i,y_j)\in V(G)$ is chosen so that $(i,j)$ is lexicographically maximum.  With this choice of $v$,  $N_G(v)\subseteq C_v$, so $|N_G(v)|\le (\Delta+1)t+d$. Since $|X|\le |C_v|$ and $|Y|\le |N_G(v)|$, this means there are at most $2((\Delta+1)t+d)$ colours that must be avoided when choosing $\varphi(v)$, so $2((\Delta+1)t+d)+1$ colours are sufficient. \Cref{new_result} is a consequence of \cref{new_result2} because a path $P$ is a graph with maximum degree $\Delta=2$ and degeneracy $d=1$.
+With this definition, $|Y|\le|N_G(v)|\le |C_v\setminus\{v\}| \le (t+1)(\Delta+1)-1$.  However the set $R$ used to define $X$ is given by $R:=(\{x_i\}\cup C_{x_i})\times N^2_I(y_i)$, where $N^2_I(y_i)$ denotes the set of at most $\Delta^2+1$ vertices in $I$ of distance at most $2$ from $y_i$.  Then $|X|\le|R\setminus\{v\}|\le (t+1)(\Delta^2+1)-1$.  
+
+
+% 
+% We conclude by noting that the proof of \cref{new_result} can easily be modified to prove the following refinement:
+% 
+% \todo[inline]{We have to rethink this next part now.}
+% \begin{thm}\label{new_result2}
+%   Let $H$ be a $t$-tree, let $B$ be a $d$-degenerate\footnote{A graph $G$ is $d$-degenerate if every subgraph of $G$ contains a vertex of degree at most $d$.} graph of maximum-degree $\Delta$, and let $G$ be a subgraph of $H\boxtimes B$. Then $G$ has a proper odd colouring $\varphi:V(H)\to\{1,\ldots,2((\Delta+1)t + d)+1\}$.
+% \end{thm}
+% 
+% The proof of \cref{new_result2} is almost identical to the proof of \cref{new_result} except for the following modifications:  Let $y_1,\ldots,y_h$ be an ordering of $V(B)$ for which $|N_B(y_j)\cap\{y_1,\ldots,y_{j}\}|\le d$ for each $j\in\{1,\ldots,h\}$ and let $C_{y_j}:=N_B(y_j)\cap\{y_1,\ldots,y_{j}\}$.  Then the definition of $C_{x_i,y_j}$ becomes
+% \[
+%    C_{x_i,y_j} := V(G)\cap \left( (C_{x_i}\times (\{y_j\}\cup N_B(y_j)))
+%        \cup \{(x_i,y): y \in C_{y_j}\}  \right) \enspace .
+% \]
+% As before the vertex $v:=(x_i,y_j)\in V(G)$ is chosen so that $(i,j)$ is lexicographically maximum.  With this choice of $v$,  $N_G(v)\subseteq C_v$, so $|N_G(v)|\le (\Delta+1)t+d$. Since $|X|\le |C_v|$ and $|Y|\le |N_G(v)|$, this means there are at most $2((\Delta+1)t+d)$ colours that must be avoided when choosing $\varphi(v)$, so $2((\Delta+1)t+d)+1$ colours are sufficient. \Cref{new_result} is a consequence of \cref{new_result2} because a path $P$ is a graph with maximum degree $\Delta=2$ and degeneracy $d=1$.
 
 \bibliographystyle{plainurlnat}
 \bibliography{odd}
