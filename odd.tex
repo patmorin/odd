@@ -98,7 +98,7 @@
 \maketitle
 
 \begin{abstract}
-  The odd colouring number of a graph is a graph parameter recently introduced by \citet{petrusevski.skrekovski:colorings}.  In this note, we show that graph with so called product structure have bounded odd-colouring number. By known results on the product structure of $k$-planar graphs, this implies that $k$-planar graphs have bounded odd-colouring number and answers a question of \citet{cranston.lafferty.ea:note}.
+  The odd colouring number is a graph parameter recently introduced by \citet{petrusevski.skrekovski:colorings}.  In this note, we show that graphs with so called product structure have bounded odd-colouring number. By known results on the product structure of $k$-planar graphs, this implies that $k$-planar graphs have bounded odd-colouring number, which answers a question of \citet{cranston.lafferty.ea:note}.
 \end{abstract}
 % \end{titlepage}
 
@@ -110,11 +110,11 @@
 
 \section{Introduction}
 
-Let $G$ be a graph.  A (not necessarily proper)\footnote{$varphi$ is a proper colouring of $G$ if $vw\in E(G)$ implies that $\varphi(v)\neq\varphi(w)$.} vertex colouring $\varphi:V(G)\to\N$ is \emph{odd} if the neighbourhood of each non-isolated vertex of $G$ contains a colour that occurs an odd number of times.  More precisely, if $N_G(v):=\{w\in V(G):vw\in E(G)\}$ denotes the neighbourhood of a vertex $v$ in $G$, then $\varphi$ is an odd colouring of $G$ if and only if, for each $v\in V(G)$ with $|N_G(v)|>0$, there exists a colour $\alpha$ such that $|\{w\in N_G(v): \varphi(w)=\alpha\}|$ is odd.
+Let $G$ be a graph.  A (not necessarily proper)\footnote{$\varphi$ is a proper colouring of $G$ if $vw\in E(G)$ implies that $\varphi(v)\neq\varphi(w)$.} vertex colouring $\varphi:V(G)\to\N$ is \emph{odd} if the neighbourhood of each non-isolated vertex of $G$ contains a colour that occurs an odd number of times.  More precisely, if $N_G(v):=\{w\in V(G):vw\in E(G)\}$ denotes the neighbourhood of a vertex $v$ in $G$, then $\varphi$ is an odd colouring of $G$ if and only if, for each $v\in V(G)$ with $|N_G(v)|>0$, there exists a colour $\alpha$ such that $|\{w\in N_G(v): \varphi(w)=\alpha\}|$ is odd.
 
 Odd colourings were recently introduced by \citet{petrusevski.skrekovski:colorings}, who showed that every planar graph $G$ has a proper odd colouring using at most $9$ colours, and conjectured that $5$ colours always suffice.  \citet{caro.petrusevski.ea:remarks} showed that $5$ colours always suffice for outerplanar graphs and showed that $8$ colours always suffice for some special cases of planar graphs.  Building on the work of \citet{caro.petrusevski.ea:remarks}, \citet{petr.portier:odd} showed that every planar graph has an odd colouring using at most $8$ colours.
 
-A minor-closed family of graphs $\mathcal{G}$ is \emph{$d$-degenerate} if every graph in $G$ contains a vertex of degree at most $d$.
+A minor-closed family of graphs\footnote{A graph $M$ is a \textit{minor} of a graph $G$ if a graph isomorphic to $M$ can be obtained from a subgraph of $G$ by contracting edges. A class $\mathcal{G}$ of graphs is \emph{minor-closed} if for every graph $G\in\mathcal{G}$, every minor of $G$ is in $\mathcal{G}$.} $\mathcal{G}$ is \emph{$d$-degenerate} if every graph in $G$ contains a vertex of degree at most $d$.
 % (Note that any proper minor-closed family of graphs is $d$-degenerate for some fixed $d$.) A vertex of degree zero is called an \emph{isolated} vertex.
 \citet{cranston.lafferty.ea:note} proved that any graph from a $d$-degenerate minor-closed family of graphs has a proper odd colouring using at most $2d+1$ colours.  This result, which has a short and elegant proof, includes outerplanar graphs and, more generally, partial $2$-trees (with $d=2$); planar graphs (with $d=5$); graphs embeddable on surfaces of Euler genus $g$; and graphs of treewidth at most $t$ (with $d=t$).
 
@@ -131,12 +131,12 @@ For the two graphs $A$ and $B$, the \emph{strong product} $A\boxtimes B$ of $A$ 
   \item $x_1x_2\in E(A)$ and $y_1y_2\in E(B)$.
 \end{inparaenum}
 A \emph{$t$-tree} $H$ is a graph that is either a clique on $t+1$ vertices or that contains a vertex $v$ of degree $t$ whose neighbours form a clique and such that $H-\{v\}$ is a $t$-tree.  The following is the main result in this paper:
-  
+
 \begin{thm}\label{new_result}
   Let $H$ be a $t$-tree, let $P$ be a path, and let $G$ be a subgraph of $H\boxtimes P$. Then $G$ has a proper odd colouring $\varphi:V(H)\to\{1,\ldots,6t+3\}$.
 \end{thm}
 
-A number of graph families are known to exhibit so called \emph{product structures} like that required of the graph $G$ in \cref{new_result}.  For example, for every planar graph $G$ there exists a $6$-tree $H$ and a path $P$ such that $G$ is isomorphic to a subgraph of $H\boxtimes P$ \cite{ueckerdt.wood.ea:improved}.  Similar results hold (with constants other than $6$) for graphs of bounded Euler genus, apex-minor free graphs, and bounded-degree graphs from proper-minor-closed families \cite{dujmovic.joret.ea:planar,dujmovic.esperet.ea:clustered}.  Most relevant for the current discussion is the following theorem of \citet{dujmovic.morin.ea:structure}:
+A number of graph families are known to exhibit so called \emph{product structure} like that required of the graph $G$ in \cref{new_result}.  For example, for every planar graph $G$ there exists a $6$-tree $H$ and a path $P$ such that $G$ is isomorphic to a subgraph of $H\boxtimes P$ \cite{ueckerdt.wood.ea:improved}.  Similar results hold (with constants other than $6$) for graphs of bounded Euler genus, apex-minor free graphs, and bounded-degree graphs from proper-minor-closed families \cite{dujmovic.joret.ea:planar,dujmovic.esperet.ea:clustered}.  Most relevant for the current discussion is the following theorem of \citet{dujmovic.morin.ea:structure}:
 
 \begin{thm}\label{k_planar}
   For every $k$-planar graph $G$ there exists an $O(k^5)$-tree $H$ and a path $P$ such that $G$ is isomorphic to a subgraph of $H\boxtimes P$.
@@ -151,14 +151,14 @@ Combining this with \cref{new_result}, we immediate obtain the following corolla
 \section{Proof of \cref{new_result}}
 
 \begin{proof}[Proof of \cref{new_result}]
-  Let $y_1,\ldots,y_h$ be the vertices of $P$, in order.  To avoid a boring edge case, we extend $P$ by one vertex in each direction, so that the vertices $y_0$ and $y_{h+1}$ are defined.  Let $x_1,\ldots,x_r$ be the vertices of $H$ ordered so that $x_1,\ldots,x_{t}$ is a clique and, for each $i\in\{t+1,\ldots,r\}$, $C_i:=N_G(x_i)\cap\{x_1,\ldots,x_{i-1}\}$ is a clique of size $t$.  The proof is by induction on the number of vertices of $G$ (which may be disconnected and have isolated vertices) and will prove the existence of a proper odd colouring $\varphi:V(G)\to\{1,\ldots,6t+3\}$ with the following additional property:
+  Let $y_1,\ldots,y_h$ be the vertices of $P$, in order.  To avoid a boring edge case, we extend $P$ by one vertex in each direction, so that the vertices $y_0$ and $y_{h+1}$ are defined.  Let $x_1,\ldots,x_r$ be the vertices of $H$ ordered so that $x_1,\ldots,x_{t}$ is a clique and, for each $i\in\{t+1,\ldots,r\}$, $C_{x_i}:=N_G(x_i)\cap\{x_1,\ldots,x_{i}\}$ is a clique of size $t$.  The proof is by induction on the number of vertices of $G$ and will prove the existence of a proper odd colouring $\varphi:V(G)\to\{1,\ldots,6t+3\}$ with the following additional property:
   \begin{compactitem}[(\ding{96})]
     \item For each $i,j\in\{1,\ldots,r\}\times \{1,\ldots,h\}$, define
     \[
-      C_{(x_i,y_j)}:=C_{i,j}:=V(G)\cap ((\{x_i\}\cup C_i)\times\{y_{j-1}, y_{j},y_{j+1}\})
+      C_{(x_i,y_j)}:=V(G)\cap ((\{x_i\}\cup C_{x_i})\times\{y_{j-1}, y_{j},y_{j+1}\})
       \enspace .
     \]
-    We will produce a colouring in which all vertices in $C_{i,j}$ receive distinct colours, for each $i,j\in\{1,\ldots,r\}\times\{1,\ldots,h\}$.
+    We will produce a colouring in which all vertices in $C_{x_i,y_j}$ receive distinct colours, for each $i,j\in\{1,\ldots,r\}\times\{1,\ldots,h\}$.
   \end{compactitem}
   Note that, for any edge $vw$ of $H\boxtimes P$, $v \in C_v$ or $w\in C_w$.  Therefore, Property~(P1) implies that the colouring $\varphi$ is a proper colouring of $H\boxtimes P$ and therefore also a proper colouring of $G$.
 
@@ -189,10 +189,12 @@ Combining this with \cref{new_result}, we immediate obtain the following corolla
 
 \section{Remarks}
 
-We note that the proof of \cref{new_result} can easily be modified to prove the following refinement:
+Our proof of \cref{new_result} is inspired by the proof of the result on $d$-degenerate minor-closed families of \citet{cranston.lafferty.ea:note}, which is an inductive proof that involves contracting an edge incident to a vertex of degree at most $d$.  However, since the class of graphs with product structure is not minor-closed we can not use edge contractions. Instead, we use vertex deletion along with condition (\ding{96}) to achieve a similar effect.
+
+We conclude by noting that the proof of \cref{new_result} can easily be modified to prove the following refinement:
 
 \begin{thm}\label{new_result2}
-  Let $H$ be a $t$-tree, let $B$ be a $d$-degenerate graph of maximum-degree $\Delta$, and let $G$ be a subgraph of $H\boxtimes B$. Then $G$ has a proper odd colouring $\varphi:V(H)\to\{1,\ldots,2((\Delta+1)t + d)+1\}$.
+  Let $H$ be a $t$-tree, let $B$ be a $d$-degenerate\footnote{A graph $G$ is $d$-degenerate if every subgraph of $G$ contains a vertex of degree at most $d$.} graph of maximum-degree $\Delta$, and let $G$ be a subgraph of $H\boxtimes B$. Then $G$ has a proper odd colouring $\varphi:V(H)\to\{1,\ldots,2((\Delta+1)t + d)+1\}$.
 \end{thm}
 
 The proof of \cref{new_result2} is almost identical to the proof of \cref{new_result} except for the definition of the $C_{x_i,y_j}$, which now becomes
