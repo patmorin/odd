@@ -159,7 +159,7 @@ Combining this with \cref{new_result}, we immediate obtain the following corolla
       C_{(x_i,y_j)}:=V(G)\cap ((C_{x_i}\times\{y_{j-1}, y_{j},y_{j+1}\})\cup\{(x_i,y_{j-1})\})
       \enspace .
     \]
-    We will produce a colouring in which all vertices in $C_{x_i,y_j}$ receive distinct colours, for each $i,j\in\{1,\ldots,r\}\times\{1,\ldots,h\}$.
+    We will produce a colouring in which all vertices in $C_{(x_i,y_j)}\cup\{(x_i,y_j)\}$ receive distinct colours, for each $i,j\in\{1,\ldots,r\}\times\{1,\ldots,h\}$.
   \end{compactitem}
   Note that, for any edge $vw$ of $G$, $v \in C_w$ or $w\in C_v$.  Therefore, (\ding{96}) implies that the colouring $\varphi$ is a proper colouring of $G$.
 
@@ -172,7 +172,8 @@ Combining this with \cref{new_result}, we immediate obtain the following corolla
   Consider the graph $G':= G-\{v\}$.  By the inductive hypothesis, we can find an odd colouring $\varphi$ of $G'$ that satisfies (\ding{96}).  We will now extend $\varphi$ to a colouring of $G$ by first listing colours that we may not choose for $\varphi(v)$:
   \begin{itemize}
     \item To guarantee that $\varphi$ satisfies (\ding{96}), we avoid colours in the set $X:= \{\varphi(w): w\in C_{v}\}$.
-    By definition, if we choose $\varphi(v)\not\in X$ then the resulting colouring will satisfy (\ding{96}).  In particular, choosing $\varphi(v)\not\in X$ ensures that $v$ satisfies (\ding{96}). Furthermore, by the maximality of $(i,j)$, $v\not\in C_w$ for any $w\in V(G)$ so colouring $v$ cannot violate (\ding{96}) for any $w\in V(G)\setminus\{v\}$.
+    By definition, if we choose $\varphi(v)\not\in X$ then the resulting colouring will satisfy (\ding{96}).  In particular, choosing $\varphi(v)\not\in X$ ensures that $v$ satisfies (\ding{96}).
+    Furthermore, by the maximality of $(i,j)$, $v\not\in C_w$ for any $w\in V(G)$ so colouring $v$ cannot violate (\ding{96}) for any $w\in V(G)\setminus\{v\}$. 
 
     Furthermore, if $v$ is not an isolated vertex of $G$ then (\ding{96}) ensures that some colour occurs exactly once in $N_G(v)$. Thus we need only ensure that we choose $\varphi(v)$ so that some colour appears an odd number of times in $N_G(w)$ for each $w\in N_G(v)$, which is what we do next.
 
