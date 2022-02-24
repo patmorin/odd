@@ -1488,7 +1488,7 @@ FUNCTION {begin.bib}
   write$ newline$
   "  \providecommand{\doi}[1]{\href{https://dx.doi.org/#1}{\nolinkurl{doi:#1}}}\fi"
   write$ newline$
-  "\providecommand{\eprint}[2][]{\url{#2}}"
+  "\providecommand{\eprint}[2][]{\href{https://arxiv.org/abs/#2}{\nolinkurl{arXiv:#2}}}"
   write$ newline$
 }
 EXECUTE {begin.bib}
