@@ -108,6 +108,21 @@
 \renewenvironment{abstract}
 {\hrule\vskip 1ex \noindent\textsc{Abstract.}}{\vskip 1ex \hrule}
 
+% Add punctuation after \paragraph
+% https://tex.stackexchange.com/questions/328355/add-a-period-after-each-paragraph-title
+\makeatletter
+\renewcommand\paragraph{%
+  \@startsection{paragraph}
+    {4}
+    {\z@}
+    {3.25ex \@plus1ex \@minus.2ex}
+    {-1em}
+    {\normalfont\normalsize\bfseries\maybe@addperiod}%
+}
+\newcommand{\maybe@addperiod}[1]{%
+  #1\@addpunct{.}%
+}
+\makeatother
 
 %------------- Use this so pdflatex outputs US letter pages -------------
 \usepackage[dvipsnames,hyperref]{xcolor}

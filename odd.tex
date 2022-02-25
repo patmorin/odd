@@ -152,14 +152,14 @@ Combining this with \cref{new_result}, we immediate obtain the following corolla
 \section{Proof of \cref{new_result}}
 
 \begin{proof}[Proof of \cref{new_result}]
-  Let $y_1,\ldots,y_h$ be the vertices of $P$, in order.  To avoid a boring edge case, we extend $P$ by one vertex in each direction, so that the vertices $y_0$ and $y_{h+1}$ are defined.  
-  
-  Let $x_1,\ldots,x_r$ be the vertices of $H$ ordered so that $x_1,\ldots,x_{t}$ is a clique and, for each $i\in\{t+1,\ldots,r\}$, $C_{x_i}:=N_G(x_i)\cap\{x_1,\ldots,x_{i}\}$ is a clique of size $t$.  
+  Let $y_1,\ldots,y_h$ be the vertices of $P$, in order.  To avoid a boring edge case, we extend $P$ by one vertex in each direction, so that the vertices $y_0$ and $y_{h+1}$ are defined.
+
+  Let $x_1,\ldots,x_r$ be the vertices of $H$ ordered so that $x_1,\ldots,x_{t}$ is a clique and, for each $i\in\{t+1,\ldots,r\}$, $C_{x_i}:=N_G(x_i)\cap\{x_1,\ldots,x_{i}\}$ is a clique of size $t$.
   We will make crucial use of the following well-known property of $t$-trees:\footnote{(\ding{74}) follows from the fact that $S:=C_{x_i}\cup\{x_i\}$ separates $\{x_1,\ldots,x_i\}\setminus S$ from $x_{i'}$.  In the language of rooted tree-decompositions, the node whose bag contains $S$ is an ancestor of all nodes whose bags contains $x_{i'}$.}
   \begin{compactitem}[(\ding{74})]
     \item If $1\le i \le i'\le r$ and $x_i \in C_{x_{i'}}$ then $C_{x_i}\supseteq C_{x_{i'}}\cap\{x_1,\ldots,x_{i-1}\}$.
   \end{compactitem}
-  
+
   With this setup out of the way, we can proceed with the proof, which is by induction on the number of vertices of $G$.  We will prove the following stronger statement:  There exists a proper odd colouring $\varphi:V(G)\to\{1,\ldots,8t+4\}$ of $G$ that satisifies the following additional condition:
   \begin{compactitem}[(\ding{96})]
     \item For each $(x_i,y_j)\in V(H\boxtimes P)$, define
@@ -181,7 +181,7 @@ Combining this with \cref{new_result}, we immediate obtain the following corolla
   \begin{itemize}
     \item To guarantee that $\varphi$ satisfies (\ding{96}), observe that assigning a colour to $v$ can only violate (\ding{96}) if it does so for some vertex $(x_{i'},y_{j'})\in V(H\boxtimes P)$ with $v\in C_{(x_{i'},y_{j'})}$.  By (\ding{74}) and the maximality of $(i,j)$, if $v\in C_{(x_{i'},y_{j'})}$ then $|j-j'|\le 1$ and $C_{x_{i}}\cup\{x_i\}\supseteq C_{x_{i'}}$.  Therefore,
     \[
-        C_{(x_{i'},y_{j'})}\setminus\{v\}\subseteq  
+        C_{(x_{i'},y_{j'})}\setminus\{v\}\subseteq
           \left(C_{x_i} \times \{y_{j-2},y_{j-1},y_j,y_{j+1},y_{j+2}\}\right)
           \cup \{(x_i,y_{j-2}),(x_i,y_{j-1})\} =: R \enspace .
     \]
@@ -206,33 +206,47 @@ Combining this with \cref{new_result}, we immediate obtain the following corolla
 
 \section{Remarks}
 
-Our proof of \cref{new_result} is inspired by the proof of the result on $d$-degenerate minor-closed families of \citet{cranston.lafferty.ea:note}, which is an inductive proof that involves contracting an edge $wv$ incident to a vertex $v$ of degree at most $d$.  The contraction of this edge (as opposed to the deletion of $v$) is crucial to ensuring that $N_G(v)$ has a colour (namely $\varphi(w)$) that appears an odd number of times.  However, since the class of graphs with product structure is not minor-closed we can not use edge contractions. Instead, we use vertex deletion along with condition (\ding{96}) to achieve a similar effect.  
+Our proof of \cref{new_result} is inspired by the proof of the result on $d$-degenerate minor-closed families of \citet{cranston.lafferty.ea:note}, which is an inductive proof that involves contracting an edge $wv$ incident to a vertex $v$ of degree at most $d$.  The contraction of this edge (as opposed to the deletion of $v$) is crucial to ensuring that $N_G(v)$ has a colour (namely $\varphi(w)$) that appears an odd number of times.  However, since the class of graphs with product structure is not minor-closed we can not use edge contractions. Instead, we use vertex deletion along with condition (\ding{96}) to achieve a similar effect.
 
 One might hope that \cref{new_result} could be generalized to the setting in which $H$ belongs to some $t$-degenerate minor-closed family of graphs.  However, bounding the size of the set $X$ required to maintain (\ding{96}) when choosing $\varphi(v)$ relies critically on (\ding{74}), which is a property of graphs of treewidth $t$ that is not true for all $t$-degenerate minor-closed graph families.
 
-A number of product structure theorems characterize graphs as subgraphs of $H\boxtimes P\boxtimes K_{\ell}$ where $H$ is a $t$-tree, $P$ is a path, and $K_\ell$ is a complete graph of order $\ell$.  Since $H\boxtimes P\boxtimes K_{\ell}$ is isomorphic to $H\boxtimes K_\ell\boxtimes P$ and $H\boxtimes K_\ell$ is a $(\ell(t+1)-1)$-tree, \cref{new_result} immediately implies that these graphs have odd colourings using $8\ell t+8\ell-4$ colours.  It is possible to improve this slightly by redoing the proof \cref{new_result}.  Doing this carefully, one finds that the sizes of the sets $X$ and $Y$ can be bounded by $|X|\le 5\ell t + 3\ell-1$ and $|Y|\le 3\ell t + 2\ell -1$ so that $|X\cup Y|\le 8\ell t + 5\ell -2$. Therefore any subgraph of $H\boxtimes P\boxtimes K_\ell$ has an odd coloring using at most $8\ell t + 5\ell -1$ colours. 
+\paragraph{Subgraphs of $H\boxtimes P\boxtimes K_\ell$}
 
-Perhaps a more interesting generalization comes by replacing $P$ by some graph of bounded degree.  In this case, we obtain the following variant on \cref{new_result}
+A number of product structure theorems characterize graphs as subgraphs of $H\boxtimes P\boxtimes K_{\ell}$ where $H$ is a $t$-tree, $P$ is a path, and $K_\ell$ is a complete graph of order $\ell$.  Since $H\boxtimes P\boxtimes K_{\ell}$ is isomorphic to $H\boxtimes K_\ell\boxtimes P$ and $H\boxtimes K_\ell$ is a $(\ell(t+1)-1)$-tree, \cref{new_result} immediately implies that these graphs have odd colourings using $8\ell t+8\ell-4$ colours.
 
-\begin{thm}\label{new_result2}
-  Let $H$ be a $t$-tree, let $I$ be a graph of maximum-degree $\Delta$, and let $G$ be a subgraph of $H\boxtimes I$.  The $G$ has an odd colouring using $O(\Delta^2 t)$ colours.
+It is possible to improve this slightly by redoing the proof \cref{new_result}.  Doing this carefully, one finds that the sizes of the sets $X$ and $Y$ can be bounded by $|X|\le 5\ell t + 3\ell-1$ and $|Y|\le 3\ell t + 2\ell -1$ so that $|X\cup Y|\le 8\ell t + 5\ell -2$. This gives the following variant of \cref{new_result}:
+
+\begin{thm}\label{new_result_kl}
+  Let $H$ be a $t$-tree, let $P$ be a path, let $K_\ell$ be a clique on $\ell$ vertices, and let $G$ be a subgraph of $H\boxtimes P\boxtimes K_\ell$.  Then $G$ has an odd colouring using at most $8\ell t + 5\ell -1$ colours.
 \end{thm}
 
-The proof of \cref{new_result2} follows the same general strategy used in the proof of \cref{new_result} except that the vertices $y_1,\ldots,y_h$ are the vertices of $I$ is no particular order.  In this setting, the set $C_{(x_i,y_i)}$ is defined as
+\paragraph{Subgraphs of $H\boxtimes B$}
+
+Perhaps a more interesting generalization comes by replacing $P$ by some graph $I$ of maximum-degree $\Delta$.  Again, one can follow the same general strategy used in the proof of \cref{new_result}, with the following changes.
+\begin{compactitem}
+  \item The vertices $y_1,\ldots,y_h$ are the vertices of $I$ is no particular order.
+  \item The set $C_{(x_i,y_i)}$ is defined as
 \[
     C_{(x_i,y_i)}:=(\{x_i\}\cup C_{x_i})\boxtimes (\{y_j\}\cup N_I(y_j)) \enspace .
 \]
-With this definition, $|Y|\le|N_G(v)|\le |C_v\setminus\{v\}| \le (t+1)(\Delta+1)-1$.  However the set $R$ used to define $X$ is given by $R:=(\{x_i\}\cup C_{x_i})\times N^2_I(y_i)$, where $N^2_I(y_i)$ denotes the set of at most $\Delta^2+1$ vertices in $I$ of distance at most $2$ from $y_i$.  Then $|X|\le|R\setminus\{v\}|\le (t+1)(\Delta^2+1)-1$.  
+  \item $|X\cup Y|$ is bounded as follows: $|Y|\le|N_G(v)|\le |C_v\setminus\{v\}| \le (t+1)(\Delta+1)-1$.  The set $R$ used to define $X$ is given by $R:=(\{x_i\}\cup C_{x_i})\times N^2_I(y_i)$, where $N^2_I(y_i)$ denotes the set of at most $\Delta^2+1$ vertices in $I$ of distance at most $2$ from $y_i$.  Then $|X|\le|R\setminus\{v\}|\le (t+1)(\Delta^2+1)-1$.
+\end{compactitem}
+These changes prove the following variant on \cref{new_result}
+
+\begin{thm}\label{new_result_delta}
+  Let $H$ be a $t$-tree, let $I$ be a graph of maximum-degree $\Delta$, and let $G$ be a subgraph of $H\boxtimes I$.  The $G$ has an odd colouring using $O(\Delta^2 t)$ colours.
+\end{thm}
 
 
-% 
+
+%
 % We conclude by noting that the proof of \cref{new_result} can easily be modified to prove the following refinement:
-% 
+%
 % \todo[inline]{We have to rethink this next part now.}
 % \begin{thm}\label{new_result2}
 %   Let $H$ be a $t$-tree, let $B$ be a $d$-degenerate\footnote{A graph $G$ is $d$-degenerate if every subgraph of $G$ contains a vertex of degree at most $d$.} graph of maximum-degree $\Delta$, and let $G$ be a subgraph of $H\boxtimes B$. Then $G$ has a proper odd colouring $\varphi:V(H)\to\{1,\ldots,2((\Delta+1)t + d)+1\}$.
 % \end{thm}
-% 
+%
 % The proof of \cref{new_result2} is almost identical to the proof of \cref{new_result} except for the following modifications:  Let $y_1,\ldots,y_h$ be an ordering of $V(B)$ for which $|N_B(y_j)\cap\{y_1,\ldots,y_{j}\}|\le d$ for each $j\in\{1,\ldots,h\}$ and let $C_{y_j}:=N_B(y_j)\cap\{y_1,\ldots,y_{j}\}$.  Then the definition of $C_{x_i,y_j}$ becomes
 % \[
 %    C_{x_i,y_j} := V(G)\cap \left( (C_{x_i}\times (\{y_j\}\cup N_B(y_j)))
