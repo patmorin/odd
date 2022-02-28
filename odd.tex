@@ -134,7 +134,7 @@ For two graphs $A$ and $B$, the \emph{strong product} $A\boxtimes B$ of $A$ and 
 A \emph{$t$-tree} $H$ is a graph that is either a clique on $t+1$ vertices or a graph that contains a vertex $v$ of degree $t$ whose neighbours form a clique and such that $H-\{v\}$ is a $t$-tree.  The following is the main result in this paper:
 
 \begin{thm}\label{new_result}
-  Let $H$ be a $t$-tree, let $P$ be a path, and let $G$ be a subgraph of $H\boxtimes P$. Then $G$ has a proper odd colouring of $G$ that uses at most $8t+4$ colours.
+  Let $H$ be a $t$-tree, let $P$ be a path, and let $G$ be a subgraph of $H\boxtimes P$. Then $G$ has a proper odd colouring that uses at most $8t+4$ colours.
 \end{thm}
 
 A number of graph families are known to exhibit so called \emph{product structure} like that required of the graph $G$ in \cref{new_result}.  For example, for every planar graph $G$ there exists a $6$-tree $H$ and a path $P$ such that $G$ is isomorphic to a subgraph of $H\boxtimes P$ \cite{ueckerdt.wood.ea:improved}.  Similar results hold (with constants other than $6$) for graphs of bounded Euler genus, apex-minor free graphs, and bounded-degree graphs from proper-minor-closed families \cite{dujmovic.joret.ea:planar,dujmovic.esperet.ea:clustered}.  Most relevant for the current discussion is the following theorem of \citet{dujmovic.morin.ea:structure}:
@@ -212,7 +212,7 @@ A number of product structure theorems characterize graphs as subgraphs of $H\bo
 It is possible to improve this slightly by redoing the proof \cref{new_result}.  In this case, the vertex $v:=(x_i,y_j,z_k)$ that is removed is also chose to maximize $(i,j)$, with ties broken arbitrarily. Then one finds that the sizes of the colour sets $X$ and $Y$ that must be avoided when choosing $\varphi(v)$ are bounded by $|X|\le 5\ell t + 3\ell-1$ and $|Y|\le 3\ell t + 2\ell -1$ so that $|X\cup Y|\le 8\ell t + 5\ell -2$. This gives the following variant of \cref{new_result}:
 
 \begin{thm}\label{new_result_kl}
-  Let $H$ be a $t$-tree, let $P$ be a path, let $K_\ell$ be a clique on $\ell$ vertices, and let $G$ be a subgraph of $H\boxtimes P\boxtimes K_\ell$.  Then $G$ has an odd colouring using at most $8\ell t + 5\ell -1$ colours.
+  Let $H$ be a $t$-tree, let $P$ be a path, let $K_\ell$ be a clique on $\ell$ vertices, and let $G$ be a subgraph of $H\boxtimes P\boxtimes K_\ell$.  Then $G$ has a proper odd colouring using at most $8\ell t + 5\ell -1$ colours.
 \end{thm}
 
 \paragraph{Subgraphs of $H\boxtimes I$}
@@ -229,7 +229,7 @@ Perhaps a more interesting generalization comes by replacing $P$ by some graph $
 These changes prove the following variantion of \cref{new_result}:
 
 \begin{thm}\label{new_result_delta}
-  Let $H$ be a $t$-tree, let $I$ be a graph of maximum-degree $\Delta$, and let $G$ be a subgraph of $H\boxtimes I$.  The $G$ has an odd colouring using at most $(\Delta^2+\Delta)(t+1)+2t+1$ colours.
+  Let $H$ be a $t$-tree, let $I$ be a graph of maximum-degree $\Delta$, and let $G$ be a subgraph of $H\boxtimes I$.  The $G$ has a proper odd colouring using at most $(\Delta^2+\Delta)(t+1)+2t+1$ colours.
 \end{thm}
 
 
