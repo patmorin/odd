@@ -20,13 +20,6 @@
 
 \usepackage[longnamesfirst,numbers,sort&compress]{natbib}
 
-\newcommand{\Rho}{\mathrm{P}}
-
-% \newcommand{\harpoon}{\overset{\rightharpoonup}}
-\newcommand{\qa}{\overset{\rightharpoonup}{\varphi}}
-\newcommand{\qb}{\overset{\rightharpoondown}{\varphi}}
-\newcommand{\qap}{\overset{\rightharpoonup}{\sigma}}
-\newcommand{\qbp}{\overset{\rightharpoondown}{\sigma}}
 
 \usepackage[mathlines]{lineno}
 \setlength{\linenumbersep}{2em}
@@ -52,10 +45,6 @@
 }
 
 
-\newcommand{\coloured}[2]{{\color{#1}{#2}}}
-\newenvironment{colourblock}[1]{\color{#1}}{}
-
-\newcommand{\condref}[1]{(C\ref{#1})}
 
 % Taken from
 % https://tex.stackexchange.com/questions/42726/align-but-show-one-equation-number-at-the-end
@@ -65,18 +54,10 @@
 \setlength{\parskip}{1ex}
 
 
-\DeclareMathOperator{\diam}{diam}
 \DeclareMathOperator{\tw}{tw}
-\DeclareMathOperator{\lca}{lca}
 
-\DeclareMathOperator{\x}{x}
-\DeclareMathOperator{\height}{height}
-\DeclareMathOperator{\depth}{depth}
-\DeclareMathOperator{\dist}{dist}
-\DeclareMathOperator{\sh}{cbt}
-\DeclareMathOperator{\cbt}{cbt}
-\DeclareMathOperator{\sgn}{sgn}
-\DeclareMathOperator{\dc}{dc}
+\DeclareMathOperator{\odd}{odd}
+\newcommand{\oddc}{\odd_c}
 
 \title{\MakeUppercase{Odd Colourings of Graph Products and Layered Decompositions}\thanks{This research was partly funded by NSERC.}}
 \author{%
@@ -92,7 +73,6 @@
 
 \usepackage{tabularx}
 
-\DeclareMathOperator{\odd}{odd}
 
 \begin{document}
 
@@ -146,6 +126,100 @@ Combining this with \cref{new_result}, we immediate obtain the following corolla
 \begin{cor}
   Every $k$-planar graph $G$ has a proper odd colouring that uses $O(k^5)$ colours.
 \end{cor}
+
+
+
+\section{Layered Decompositions}
+
+For a graph $G$, let $\odd(G)$ denote the minimum number of colours used by any proper odd colouring of $G$.
+
+\begin{obs}
+  Let $G$ be a graph and let $\{V_1,\ldots,V_d\}$ be a partition of $V(G)$ such that, for each $i\in\{1,\ldots,d\}$, $G[V_i]$ has no isolated vertices.  Then $\odd(G) \le \sum_{i=1}^d \odd(G[V_i])$.
+\end{obs}
+
+\begin{proof}
+  Let $C_1,\ldots,C_d$ be pairwise disjoint sets of colours with $|C_i|=\odd(G[V_i])$.  For each $i\in\{1,\ldots,d\}$, let $\varphi:V_i\to C_i$ be a proper odd colouring of $G[V_i]$.  Clearly $\varphi$ is a colouring of $G$ that uses at most $\sum_{i=1}^d \odd(G[V_i])$ colours, so we only need to verify that $\varphi$ is a proper odd colouring of $G$.
+  \begin{compactitem}
+    \item To see that $\varphi$ is a proper colouring of $G$, let $vw$ be an edge of $G$ with $v\in V_i$ and $w\in V_j$ for some $i,j\in\{1,\ldots,d\}$. If $i=j$ then $\varphi(v)\neq\varphi(w)$ since $\varphi$ is a proper colouring of $G[V_i]$.  If $i\neq j$, then $\varphi(v)\neq\varphi(w)$ since $\varphi(v)\in C_i$ and $\varphi(v)\in C_j$.
+
+    \item To see that $\varphi$ is an odd colouring of $G$, let $v$ be a vertex in $V_i$ for some $i\in\{1,\ldots,d\}$.   Since $v$ is not an isolated vertex in $G[V_i]$, some colour $\alpha$ appears an odd number, $a$, of times in $N_{G[V_i]}(v)$.  Since $\alpha\not\in C_j$ for any $j\neq i$, $\alpha$ also appears $a$ times in $N_G(v)$. \qedhere
+  \end{compactitem}
+\end{proof}
+
+
+A \emph{layering} $\mathcal{L}:=L_1,\ldots,L_h$ of a graph $G$ is a partition of $V(G)$ into a sequence of sets such that, for each edge $vw$ of $G$, $v\in L_i$, $w\in L_j$ implies that $|i-j|\le 1$.  For convenience, we will use the convention that $L_i:=\emptyset$ for each $i < 1$ and each $i> h$.  We say that $\mathcal{L}$ is \emph{$(\ell,c)$-good} if, for each $i\in\{1,\ldots,h\}$ and each subgraph $G'$ of $G[L_i\cup\cdots\cup L_{i+c-1}]$, $\odd(G')\le c$.
+
+\begin{lem}\label{partition}
+  If a graph $G$ has a $(4,c)$-good layering then $\odd(G)\le 2c$.
+\end{lem}
+
+\begin{proof}
+  Without loss of generality, we may assume that $G$ has no isolated vertices.
+  Let $\mathcal{L}:=L_1,\ldots,L_h$ be a $(4,c)$-good layering of $G$,
+  let $X_1:=\cup\{L_i:i\bmod 4\in\{0,1\}\}$ and let $X_2:=V(G)\setminus X_1=\cup\{L_i:i\bmod 4\in\{2,3\}\}$.  Let $I_2$ be the set of isolated vertices in $G[X_2]$, let $Y_1:=X_1\cup I_2$, and let $I_1$ be the set of isolated vertices in $G[Y_1]$.  Finally, let $V_1:=Y_1\setminus I_1$ and let $V_2:=V(G)\setminus V_1=X_2\cup I_1\setminus I_2$.
+
+  We claim that, for each $i\in\{1,2\}$, $G_i:=G[V_i]$ has no isolated vertices. For $G_1$ this is obvious, since by definition $G_1$ is the subgraph obtained from $G[Y_1]$ by removing all isolated vertices.  Now consider some vertex $v$ of $G_2$. There are two cases to consider:
+  \begin{compactenum}
+    \item If $v\in X_2\setminus I_2$ then $v\not\in I_2$ so $v$ has a neighbour $w$ in $G[X_2]$.  Then $w$ is not an isolated vertex of $G[X_2]$ so $w\not\in I_2$.  Therefore $w\in V(G_2)\supseteq X_2\setminus I_2$. Therefore $vw$ is an edge of $G_2$ so $v$ is not an isolated vertex of $G_2$.
+    \item If $v\in I_1$ then, because $G$ has no isolated vertices, $v$ has a neighbour $w$ in $G$.  Since $v\in I_1$, $v$ is isolated in $G[Y_1]$ so $w\not\in Y_1= X_1\cup I_2$. Therefore $w\in V(G_2)\supseteq X_2\setminus I_2$.  Therefore $vw$ is an edge of $G_2$ so $v$ is not an isolated vertex of $G_2$.
+  \end{compactenum}
+  Next we claim that, for each $i\in\{1,2\}$, each connected component of $G_i$ is contained in at most four consecutive layers of $\mathcal{L}$.  Suppose, for the sake of contradiction that some component of $G_i$ contains a vertex $s\in L_j$ and a vertex $t\in L_{j+4}$ for some $j\in\{1\ldots,h-4\}$.  Then any path $P$ from $s$ to $t$ in $G_i$ contains an edge $vw$ with $v\in L_a$, $w\in L_{a+1}$ for some $a\equiv 0\bmod 4$ and also contains an edge $xy$ with $x\in L_b$ and $y\in L_{b+1}$ for some $b\equiv 2\bmod 4$.  The edge $vw$ implies that $P$ is contained in $G_1$ but the edge $xy$ implies that $P$ is contained in $G_2$, a contradiction.
+
+  Therefore, for each $i\in\{1,2\}$, each component of $G_i$ is a subgraph of $G[L_j\cup\cdots\cup L_{j+3}]$ for some $j\in\{1,\ldots,h-3\}$.  Since $G$ is $(4,c)$-good, this implies that $\odd(G_i)\le c$.  Therefore, by \cref{partition}, $\odd(G)\le \odd(G_1)+\odd(G_2)\le 2c$.
+\end{proof}
+
+\begin{lem}
+  If a graph $G$ has a $(3,c)$-good layering then $\odd(G)\le 3c$.
+\end{lem}
+
+\begin{lem}
+  If a graph $G$ has a layering that is simultaneously $(3,c_3)$-good and $(4,c_4)$-good then $\odd(G)\le c_3+c_4$.
+\end{lem}
+
+
+\begin{lem}
+  If a graph $G$ has a layering that is $(2,c)$-good then $\odd(G)\le c^2$.
+\end{lem}
+
+
+
+
+\begin{lem}\label{four_layer}
+  Let $G$ be a graph and let $\mathcal{L}:=L_1,\ldots,L_h$ be a layering of $G$ with the property that, for each odd $i\in\{1,\ldots,h\}$, every subgraph of $G[\bigcup_{j=i-1}^{i+2}L_{j}]$ has an odd colouring using at most $c$ colours. Then $G$ has odd chromatic number at most $2c$.
+\end{lem}
+
+A \emph{layered tree decomposition} of $G$ is a pair $(\mathcal{L},\mathcal{T})$ where $\mathcal{L}:=V_0,\ldots,V_h$ is a layering of $G$ and $\mathcal{T}:=(B_x:x\in V(T))$ is a tree decomposition of $G$.  The \emph{width} of $(\mathcal{L},\mathcal{T})$ is $\max\{|L_j\cap B_x|:j,x\in\{0,\ldots,h\}\times V(T)\}$.  The \emph{layered treewidth} of $G$ is the minimum width over all possible layered tree decompositions of $G$.
+
+
+\begin{cor}\label{layered_treewidth}
+  Let $G$ be a graph of layered treewidth at most $t$.  Then $G$ has odd chromatic number at most $16t-2$.
+\end{cor}
+
+\begin{proof}
+  By the definition of layered treewidth, $G[\bigcup_{j=i-1}^{i+2}L_{j}]$ has a tree decomposition in which each bag contains at most $4t$ vertices and therefore has treewidth at most $4t-1$.  The family of graphs with treewidth at most $4t-1$ is a $(4t-1)$-degenerate minor-closed family so, by the result of \citet{cranston.XX}, $G[\bigcup_{j=i-1}^{i+2}L_{j}]$ has an odd colouring using at most $c:=2(4t-1)+1=8t-1$ colours.  Therefore, by \cref{four_layer} $G$ has an odd colouring using at most $2c=16t-2$ colours.
+\end{proof}
+
+\citet{dujmovic.eppstein.ea:genus} prove that any $k$-planar graph $G$ has layered treewidth $t\le 6k+1$.  Together with \cref{layered_treewidth}, this immediately implies the following corollary:
+
+\begin{cor}\label{k_planar}
+  Let $G$ be a $k$-planar graph.  Then $G$ has odd chromatic number at most $96k+14$.
+\end{cor}
+
+\begin{lem}\label{three_layer}
+  Let $G$ be a graph and let $\mathcal{L}:=L_0,\ldots,L_h$ be a layering of $G$ with the property that, for each $i$, every subgraph of $G[\bigcup_{j=i-1}^{i+1}L_{j}]$ has an odd colouring using at most $c$ colours. Then $G$ has an odd colouring using at most $3c$ colours.
+\end{lem}
+
+
+
+
+
+\begin{thm}
+  Let $G$ be a graph with layered treewidth $t$.  Then $G$ has an odd colouring using at most $18t+O(1)$ colours.
+\end{thm}
+
+
+
+
 
 \section{Graphs with Product Structure}
 
@@ -233,44 +307,6 @@ These changes prove the following variation of \cref{new_result}:
 \begin{thm}\label{new_result_delta}
   Let $H$ be a $t$-tree, let $I$ be a graph of maximum-degree $\Delta$, and let $G$ be a subgraph of $H\boxtimes I$.  The $G$ has a proper odd colouring using at most $(\Delta^2+\Delta)(t+1)+2t+1$ colours.
 \end{thm}
-
-\section{Layered Decompositions}
-
-A \emph{layering} $\mathcal{L}:=L_1,\ldots,L_h$ of a graph $G$ is a partition of $V(G)$ into a sequence of sets such that, for each edge $vw$ of $G$, $v\in L_i$, $w\in L_j$ implies that $|i-j|\le 1$.  For convenience, we use the convention that $L_i:=\emptyset$ for each $i < 1$ and each $i> h$.
-
-\begin{lem}\label{four_layer}
-  Let $G$ be a graph and let $\mathcal{L}:=L_1,\ldots,L_h$ be a layering of $G$ with the property that, for each odd $i\in\{1,\ldots,h\}$, every subgraph of $G[\bigcup_{j=i-1}^{i+2}L_{j}]$ has an odd colouring using at most $c$ colours. Then $G$ has odd chromatic number at most $2c$.
-\end{lem}
-
-A \emph{layered tree decomposition} of $G$ is a pair $(\mathcal{L},\mathcal{T})$ where $\mathcal{L}:=V_0,\ldots,V_h$ is a layering of $G$ and $\mathcal{T}:=(B_x:x\in V(T))$ is a tree decomposition of $G$.  The \emph{width} of $(\mathcal{L},\mathcal{T})$ is $\max\{|L_j\cap B_x|:j,x\in\{0,\ldots,h\}\times V(T)\}$.  The \emph{layered treewidth} of $G$ is the minimum width over all possible layered tree decompositions of $G$.
-
-
-\begin{cor}\label{layered_treewidth}
-  Let $G$ be a graph of layered treewidth at most $t$.  Then $G$ has odd chromatic number at most $16t-2$.
-\end{cor}
-
-\begin{proof}
-  By the definition of layered treewidth, $G[\bigcup_{j=i-1}^{i+2}L_{j}]$ has a tree decomposition in which each bag contains at most $4t$ vertices and therefore has treewidth at most $4t-1$.  The family of graphs with treewidth at most $4t-1$ is a $(4t-1)$-degenerate minor-closed family so, by the result of \citet{cranston.XX}, $G[\bigcup_{j=i-1}^{i+2}L_{j}]$ has an odd colouring using at most $c:=2(4t-1)+1=8t-1$ colours.  Therefore, by \cref{four_layer} $G$ has an odd colouring using at most $2c=16t-2$ colours.
-\end{proof}
-
-\citet{dujmovic.eppstein.ea:genus} prove that any $k$-planar graph $G$ has layered treewidth $t\le 6k+1$.  Together with \cref{layered_treewidth}, this immediately implies the following corollary:
-
-\begin{cor}\label{k_planar}
-  Let $G$ be a $k$-planar graph.  Then $G$ has odd chromatic number at most $96k+14$.
-\end{cor}
-
-\begin{lem}\label{three_layer}
-  Let $G$ be a graph and let $\mathcal{L}:=L_0,\ldots,L_h$ be a layering of $G$ with the property that, for each $i$, every subgraph of $G[\bigcup_{j=i-1}^{i+1}L_{j}]$ has an odd colouring using at most $c$ colours. Then $G$ has an odd colouring using at most $3c$ colours.
-\end{lem}
-
-
-
-
-
-\begin{thm}
-  Let $G$ be a graph with layered treewidth $t$.  Then $G$ has an odd colouring using at most $18t+O(1)$ colours.
-\end{thm}
-
 
 
 
