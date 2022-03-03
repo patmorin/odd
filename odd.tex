@@ -78,9 +78,10 @@
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\dc}{dc}
 
-\title{\MakeUppercase{Odd Colourings of Graph Products}\thanks{This research was partly funded by NSERC.}}
+\title{\MakeUppercase{Odd Colourings of Graph Products and Layered Decompositions}\thanks{This research was partly funded by NSERC.}}
 \author{%
   Vida Dujmović\thanks{Department of Computer Science and Electrical Engineering, University of Ottawa}\qquad
+  Chun-Hung Liu\thanks{Department of Electrical and Computer Engineering, Mississippi State University}\qquad
   Pat Morin\thanks{School of Computer Science, Carleton University}\qquad
   Saeed Odak\footnotemark[2]
 }
@@ -133,9 +134,6 @@ For two graphs $A$ and $B$, the \emph{strong product} $A\boxtimes B$ of $A$ and 
 \end{inparaenum}
 A \emph{$t$-tree} $H$ is a graph that is either a clique on $t+1$ vertices or a graph that contains a vertex $v$ of degree $t$ whose neighbours form a clique and such that $H-\{v\}$ is a $t$-tree.  The following is the main result in this paper:
 
-\begin{thm}\label{new_result}
-  Let $H$ be a $t$-tree, let $P$ be a path, and let $G$ be a subgraph of $H\boxtimes P$. Then $G$ has a proper odd colouring that uses at most $8t+4$ colours.
-\end{thm}
 
 A number of graph families are known to exhibit so called \emph{product structure} like that required of the graph $G$ in \cref{new_result}.  For example, for every planar graph $G$ there exists a $6$-tree $H$ and a path $P$ such that $G$ is isomorphic to a subgraph of $H\boxtimes P$ \cite{ueckerdt.wood.ea:improved}.  Similar results hold (with constants other than $6$) for graphs of bounded Euler genus, apex-minor free graphs, and bounded-degree graphs from proper-minor-closed families \cite{dujmovic.joret.ea:planar,dujmovic.esperet.ea:clustered}.  Most relevant for the current discussion is the following theorem of \citet{dujmovic.morin.ea:structure}:
 
@@ -149,9 +147,13 @@ Combining this with \cref{new_result}, we immediate obtain the following corolla
   Every $k$-planar graph $G$ has a proper odd colouring that uses $O(k^5)$ colours.
 \end{cor}
 
-\section{Proof of \cref{new_result}}
+\section{Graphs with Product Structure}
 
-\begin{proof}[Proof of \cref{new_result}]
+\begin{thm}\label{new_result}
+  Let $H$ be a $t$-tree, let $P$ be a path, and let $G$ be a subgraph of $H\boxtimes P$. Then the odd chromatic index of $G$ is at most $8t+4$.
+\end{thm}
+
+\begin{proof}
   Let $y_1,\ldots,y_h$ be the vertices of $P$, in order.  To avoid a boring edge case, we extend $P$ by one vertex in each direction, so that the vertices $y_0$ and $y_{h+1}$ are defined.
 
   Let $x_1,\ldots,x_r$ be the vertices of $H$ ordered so that $x_1,\ldots,x_{t}$ is a clique and, for each $i\in\{t+1,\ldots,r\}$, the vertices in $C_{x_i}:=N_G(x_i)\cap\{x_1,\ldots,x_{i-1}\}$ form a clique of order $t$.  We make crucial use of the following well-known property of $t$-trees:\footnote{(\ding{74}) follows from the fact that $S:=C_{x_i}\cup\{x_i\}$ separates $\{x_1,\ldots,x_i\}\setminus S$ from $x_{i'}$.  In the language of rooted tree-decompositions, the node whose bag contains $S$ is an ancestor of all nodes whose bags contains $x_{i'}$.}
@@ -199,7 +201,7 @@ Combining this with \cref{new_result}, we immediate obtain the following corolla
 \end{proof}
 
 
-\section{Remarks}
+\subsection{Remarks}
 
 Our proof of \cref{new_result} is inspired by the proof of the result on $d$-degenerate minor-closed families of \citet{cranston.lafferty.ea:note}, which is an inductive proof that involves contracting an edge $wv$ incident to a vertex $v$ of degree at most $d$.  The contraction of this edge (as opposed to the deletion of $v$) is crucial to ensuring that $N_G(v)$ has a colour (namely $\varphi(w)$) that appears an odd number of times.  However, since the class of graphs with product structure is not minor-closed we can not use edge contractions. Instead, we use vertex deletion along with condition (\ding{96}) to achieve a similar effect.
 
@@ -226,11 +228,49 @@ Perhaps a more interesting generalization comes by replacing $P$ by some graph $
 \]
   \item $|X\cup Y|$ is bounded as follows: $|Y|\le|N_G(v)|\le |C_v\setminus\{v\}| \le (t+1)(\Delta+1)-1$.  The set $R$ used to define $X$ is given by $R:=(\{x_i\}\cup C_{x_i})\times N^2_I(y_i)$, where $N^2_I(y_i)$ denotes the set of at most $\Delta^2+1$ vertices in $I$ of distance at most $2$ from $y_i$.  Then $|X|\le|R\setminus\{v\}|\le (t+1)(\Delta^2+1)-1$.  Therefore $|X\cup Y|\le |X|+|Y|\le (\Delta^2+\Delta)(t+1)+2t$.
 \end{compactitem}
-These changes prove the following variantion of \cref{new_result}:
+These changes prove the following variation of \cref{new_result}:
 
 \begin{thm}\label{new_result_delta}
   Let $H$ be a $t$-tree, let $I$ be a graph of maximum-degree $\Delta$, and let $G$ be a subgraph of $H\boxtimes I$.  The $G$ has a proper odd colouring using at most $(\Delta^2+\Delta)(t+1)+2t+1$ colours.
 \end{thm}
+
+\section{Layered Decompositions}
+
+A \emph{layering} $\mathcal{L}:=L_1,\ldots,L_h$ of a graph $G$ is a partition of $V(G)$ into a sequence of sets such that, for each edge $vw$ of $G$, $v\in L_i$, $w\in L_j$ implies that $|i-j|\le 1$.  For convenience, we use the convention that $L_i:=\emptyset$ for each $i < 1$ and each $i> h$.
+
+\begin{lem}\label{four_layer}
+  Let $G$ be a graph and let $\mathcal{L}:=L_1,\ldots,L_h$ be a layering of $G$ with the property that, for each odd $i\in\{1,\ldots,h\}$, every subgraph of $G[\bigcup_{j=i-1}^{i+2}L_{j}]$ has an odd colouring using at most $c$ colours. Then $G$ has odd chromatic number at most $2c$.
+\end{lem}
+
+A \emph{layered tree decomposition} of $G$ is a pair $(\mathcal{L},\mathcal{T})$ where $\mathcal{L}:=V_0,\ldots,V_h$ is a layering of $G$ and $\mathcal{T}:=(B_x:x\in V(T))$ is a tree decomposition of $G$.  The \emph{width} of $(\mathcal{L},\mathcal{T})$ is $\max\{|L_j\cap B_x|:j,x\in\{0,\ldots,h\}\times V(T)\}$.  The \emph{layered treewidth} of $G$ is the minimum width over all possible layered tree decompositions of $G$.
+
+
+\begin{cor}\label{layered_treewidth}
+  Let $G$ be a graph of layered treewidth at most $t$.  Then $G$ has odd chromatic number at most $16t-2$.
+\end{cor}
+
+\begin{proof}
+  By the definition of layered treewidth, $G[\bigcup_{j=i-1}^{i+2}L_{j}]$ has a tree decomposition in which each bag contains at most $4t$ vertices and therefore has treewidth at most $4t-1$.  The family of graphs with treewidth at most $4t-1$ is a $(4t-1)$-degenerate minor-closed family so, by the result of \citet{cranston.XX}, $G[\bigcup_{j=i-1}^{i+2}L_{j}]$ has an odd colouring using at most $c:=2(4t-1)+1=8t-1$ colours.  Therefore, by \cref{four_layer} $G$ has an odd colouring using at most $2c=16t-2$ colours.
+\end{proof}
+
+\citet{dujmovic.eppstein.ea:genus} prove that any $k$-planar graph $G$ has layered treewidth $t\le 6k+1$.  Together with \cref{layered_treewidth}, this immediately implies the following corollary:
+
+\begin{cor}\label{k_planar}
+  Let $G$ be a $k$-planar graph.  Then $G$ has odd chromatic number at most $96k+14$.
+\end{cor}
+
+\begin{lem}\label{three_layer}
+  Let $G$ be a graph and let $\mathcal{L}:=L_0,\ldots,L_h$ be a layering of $G$ with the property that, for each $i$, every subgraph of $G[\bigcup_{j=i-1}^{i+1}L_{j}]$ has an odd colouring using at most $c$ colours. Then $G$ has an odd colouring using at most $3c$ colours.
+\end{lem}
+
+
+
+
+
+\begin{thm}
+  Let $G$ be a graph with layered treewidth $t$.  Then $G$ has an odd colouring using at most $18t+O(1)$ colours.
+\end{thm}
+
 
 
 
