@@ -62,7 +62,7 @@
 \title{\MakeUppercase{Odd Colourings of Graph Products and Layered Decompositions}\thanks{This research was partly funded by NSERC.}}
 \author{%
   Vida Dujmović\thanks{Department of Computer Science and Electrical Engineering, University of Ottawa}\qquad
-  Chun-Hung Liu\thanks{Department of Electrical and Computer Engineering, Mississippi State University}\qquad
+  Chun-Hung Liu\thanks{Department of Mathematics, Texas A\&M University}\qquad
   Pat Morin\thanks{School of Computer Science, Carleton University}\qquad
   Saeed Odak\footnotemark[2]
 }
@@ -80,7 +80,7 @@
 \maketitle
 
 \begin{abstract}
-  The odd colouring number is a new graph parameter introduced by \citet{petrusevski.skrekovski:colorings}.  In this note, we show that graphs with so called product structure have bounded odd-colouring number. By known results on the product structure of $k$-planar graphs, this implies that $k$-planar graphs have bounded odd-colouring number, which answers a question of \citet{cranston.lafferty.ea:note}.
+  The odd chromatic number is a new graph parameter introduced by \citet{petrusevski.skrekovski:colorings}.  In this note, we show that graphs of bounded layered treewidth and graphs with so called product structure have bounded odd chromatic number and bounded odd choice number, respectively. By known results on the layered treewidth and product structure of $k$-planar graphs, this implies that $k$-planar graphs have bounded odd chromatic number and choice number, which answers a question of \citet{cranston.lafferty.ea:note}.
 \end{abstract}
 % \end{titlepage}
 
@@ -92,48 +92,70 @@
 
 \section{Introduction}
 
-Let $G$ be a graph.  A (not necessarily proper)\footnote{$\varphi$ is a proper colouring of $G$ if $vw\in E(G)$ implies that $\varphi(v)\neq\varphi(w)$.} vertex colouring $\varphi:V(G)\to\N$ is \emph{odd} if the neighbourhood of each non-isolated vertex of $G$ contains a colour that occurs an odd number of times.  More precisely, if $N_G(v):=\{w\in V(G):vw\in E(G)\}$ denotes the neighbourhood of a vertex $v$ in $G$, then $\varphi$ is an odd colouring of $G$ if and only if, for each $v\in V(G)$ with $|N_G(v)|>0$, there exists a colour $\alpha$ such that $|\{w\in N_G(v): \varphi(w)=\alpha\}|$ is odd.
+Let $G$ be a graph.  A (not necessarily proper)\footnote{$\varphi$ is a proper colouring of $G$ if $vw\in E(G)$ implies that $\varphi(v)\neq\varphi(w)$.} vertex colouring $\varphi:V(G)\to\N$ is \emph{odd} if the neighbourhood of each non-isolated vertex of $G$ contains a colour that occurs an odd number of times. More precisely, if $N_G(v):=\{w\in V(G):vw\in E(G)\}$ denotes the neighbourhood of a vertex $v$ in $G$, then $\varphi$ is an odd colouring of $G$ if and only if, for each $v\in V(G)$ with $|N_G(v)|>0$, there exists a colour $\alpha$ such that $|\{w\in N_G(v): \varphi(w)=\alpha\}|$ is odd.  For any graph $G$, the \emph{proper odd chromatic number} $\odd(G)$ of $G$ is the minimum number of colours used\footnote{We say that a colouring $\varphi$ of $G$ \emph{uses $c$ colours} if $c=|\{\varphi(v):v\in V(G)\}$.} by any proper odd colouring of $G$.
 
-Odd colourings were recently introduced by \citet{petrusevski.skrekovski:colorings}, who showed that every planar graph $G$ has a proper odd colouring using at most $9$ colours\footnote{We say that a colouring $\varphi$ of $G$ \emph{uses $c$ colours} if $c=|\{\varphi(v):v\in V(G)\}$.}, and conjectured that $5$ colours always suffice.  \citet{caro.petrusevski.ea:remarks} showed that $5$ colours always suffice for outerplanar graphs and showed that $8$ colours always suffice for some special cases of planar graphs.  Building on the work of \citet{caro.petrusevski.ea:remarks}, \citet{petr.portier:odd} showed that every planar graph has an odd colouring using at most $8$ colours.
+\subsection{Previous Work}
+
+Odd colourings were recently introduced by \citet{petrusevski.skrekovski:colorings}, who showed that $\odd(G)\le 9$ for every planar graph $G$ and conjectured that $\odd(G)\le 5$ for every planar graph $G$. \citet{caro.petrusevski.ea:remarks} showed that $\odd(G)\le 5$ for every outerplanar graph $G$ and that $\odd(G)\le 8$ for some some special cases of planar graphs $G$.    Building on the work of \citet{caro.petrusevski.ea:remarks}, \citet{petr.portier:odd} showed that $\odd(G)\le 8$ for every planar graph $G$.
 
 A minor-closed family of graphs\footnote{A graph $M$ is a \textit{minor} of a graph $G$ if a graph isomorphic to $M$ can be obtained from a subgraph of $G$ by contracting edges. A class $\mathcal{G}$ of graphs is \emph{minor-closed} if for every graph $G\in\mathcal{G}$, every minor of $G$ is in $\mathcal{G}$.} $\mathcal{G}$ is \emph{$d$-degenerate} if every graph in $\mathcal{G}$ contains a vertex of degree at most $d$.
 % (Note that any proper minor-closed family of graphs is $d$-degenerate for some fixed $d$.) A vertex of degree zero is called an \emph{isolated} vertex.
-\citet{cranston.lafferty.ea:note} proved that any graph from a $d$-degenerate minor-closed family of graphs has a proper odd colouring using at most $2d+1$ colours.  This result, which has a short and elegant proof, includes outerplanar graphs and, more generally, partial $2$-trees (with $d=2$); planar graphs (with $d=5$); graphs embeddable on surfaces of Euler genus $g$; and graphs of treewidth at most $t$ (with $d=t$).
+\citet{cranston.lafferty.ea:note} proved that $\odd(G)\le 2d+1$ for any graph $G$ that belongs to a $d$-degenerate minor-closed family of graphs.  This result, which has a short and elegant proof, includes outerplanar graphs and, more generally, partial $2$-trees (with $d=2$); planar graphs (with $d=5$); graphs embeddable on surfaces of Euler genus $g$; and graphs of treewidth at most $t$ (with $d=t$).  
 
-\citet{cranston.lafferty.ea:note} also consider $1$-planar graphs, which do not form a minor-closed family, and show that any $1$-planar graph\footnote{A graph is $k$-planar if it has an embedding in the plane in which no edge contains a vertex other than its endpoints and each edge is involved in at most $k$ crossings with other edges.} has a proper odd colouring using at most $23$ colours.  They ask if this can be extended to $k$-planar graphs for general $k>1$.  Our main result, \cref{new_result} below, is a more general results for graphs having \emph{product structure} and implies that any $k$-planar graph has a proper odd colouring using $O(k^5)$ colours.
-%
-% \begin{thm}\label{old_result}
-%   Let $\mathcal{H}$ be a $d$-degenerate minor closed family of graphs and let $H$ be a member of $\mathcal{H}$ with no isolated vertices.  Then $H$ has a proper odd colouring $\varphi:V(H)\to\{1,\ldots,2d+1\}$.
-% \end{thm}
+Like other colouring problems, odd colouring can also be studied through the lens of list-colouring/choosability.  A \emph{$c$-list assignment} of a graph $G$ is a function $\ell:V(G)\to\binom{\N}{c}$ that assigns to each vertex $v$ of $G$ a set $\ell(v)$ of $c$ colours.  We say that a colouring $\varphi$ of $G$ respects $\ell$ if $\varphi(v)\in \ell(v)$ for each vertex $v$ of $G$.  The \emph{proper odd choice number} $\oddc(G)$ of $G$ is the minimum value of $c$ such that, for any $c$-list assignment $\ell$ of $G$, $G$ has a proper odd colouring that respects $\ell$. Clearly $\odd(G)\le \oddc(G)$ for any graph $G$ since any colouring of $G$ that respects the list assignment $\ell(v):=\{1,\ldots,c\}$ for each $v\in V(G)$ uses at most $c$ colours.  The proof given by \citet{cranston.lafferty.ea:note} applies, without modification to this setting:
 
-For two graphs $A$ and $B$, the \emph{strong product} $A\boxtimes B$ of $A$ and $B$ is the graph with vertex set $V(A\boxtimes B):=V(A)\times V(B)$ and that contains an edge with endpoints $(x_1,y_1)$ and $(x_2,y_2)$ if and only if
-\begin{inparaenum}[(i)]
-  \item $x_1x_2\in E(A)$ and $y_1=y_2$;
-  \item $x_1=x_2$ and $y_1y_2\in E(B)$; or
-  \item $x_1x_2\in E(A)$ and $y_1y_2\in E(B)$.
-\end{inparaenum}
-A \emph{$t$-tree} $H$ is a graph that is either a clique on $t+1$ vertices or a graph that contains a vertex $v$ of degree $t$ whose neighbours form a clique and such that $H-\{v\}$ is a $t$-tree.  The following is the main result in this paper:
-
-
-A number of graph families are known to exhibit so called \emph{product structure} like that required of the graph $G$ in \cref{new_result}.  For example, for every planar graph $G$ there exists a $6$-tree $H$ and a path $P$ such that $G$ is isomorphic to a subgraph of $H\boxtimes P$ \cite{ueckerdt.wood.ea:improved}.  Similar results hold (with constants other than $6$) for graphs of bounded Euler genus, apex-minor free graphs, and bounded-degree graphs from proper-minor-closed families \cite{dujmovic.joret.ea:planar,dujmovic.esperet.ea:clustered}.  Most relevant for the current discussion is the following theorem of \citet{dujmovic.morin.ea:structure}:
-
-\begin{thm}[\citet{dujmovic.morin.ea:structure}]\label{k_planar}
-  For every $k$-planar graph $G$ there exists an $O(k^5)$-tree $H$ and a path $P$ such that $G$ is isomorphic to a subgraph of $H\boxtimes P$.
+\begin{thm}[\citet{cranston.lafferty.ea:note}]\label{degenerate}
+  If $G$ belongs a $d$-degenerate minor-closed family of graphs then $\oddc(G)\le 2d+1$.  
 \end{thm}
 
-Combining this with \cref{new_result}, we immediate obtain the following corollary, answering the question posed by \citet{cranston.lafferty.ea:note}.
+\citet{cranston.lafferty.ea:note} also consider $1$-planar graphs, which do not form a minor-closed family, and show that any $1$-planar graph\footnote{A graph is $k$-planar if it has an embedding in the plane in which no edge contains a vertex other than its endpoints and each edge is involved in at most $k$ crossings with other edges.} $G$ has $\odd(G)\le 23$. Their proof, which uses discharging, does not obviously generalize establish a bound on $\odd_c(G)$.\todo{Is this true?} The same authors ask if a similar result can be shown for $k$-planar graphs for general $k>1$.
 
-\begin{cor}
-  Every $k$-planar graph $G$ has a proper odd colouring that uses $O(k^5)$ colours.
+\subsection{New Results}
+
+In this paper, we consider proper odd colourings of graphs that have certain kinds of layered decompositions, including graphs of layered treewidth at most $t$ \cite{dujmovic.morin.ea:layered} and graphs contained in the strong product of a graph of treewidth $t$ and a path \cite{dujmovic.joret.ea:planar}.  (Treewidth, layered treewidth and strong products are formally defined in \cref{layered_treewidth} and \cref{product_structure}.)  
+% Each of these graph classes have been used recently to make progress and resolve a number of longstanding open problems on both minor-closed and non-minor closed graph classes \cite{X,X,X,X,X,}.  
+In each case we establish bounds with a linear dependence on $t$.  
+
+For graphs of bounded layered treewidth we establish bounds on the proper odd chromatic number:
+
+\begin{thm}\label{layered_treewidth_result}
+  If $G$ is a graph with layered treewidth at most $t$ then $\odd(G)\le 16t-2$.
+\end{thm}
+
+\citet[Theorem 10]{dujmovic.eppstein.ea:genus} show that every $k$-planar graph has layered treewidth at most $6(k+1)$.  Along with \cref{layered_treewidth}, this immediately implies the following result, answering the question posed by \citet{cranston.lafferty.ea:note}.
+
+\begin{cor}\label{k_planar}
+  If $G$ is a $k$-planar graph then $\odd(G)\le 96k+14$.
+\end{cor}
+
+For graphs with product structure, we are able to establish stronger bounds on the proper odd choice number.
+
+\begin{thm}\label{product_structure_result}
+  If $G$ is a subgraph of $H\boxtimes P$ where $H$ is a graph of treewidth at most $t$ and $P$ is a path then $\oddc(G)\le 8t+4$.
+\end{thm}
+
+\citet[Theorem 2]{dujmovic.morin.ea:structure} show that every $k$-planar graph is isomorphic to a subgraph of the strong product of a graph of treewidth $O(k^5)$ and a path, which establishes the following bound on the proper odd choice number of $k$-planar graphs:
+
+\begin{cor}\label{k_planar_choice}
+  If $G$ is a $k$-planar graph then $\oddc(G)\in O(k^5)$.
 \end{cor}
 
 
+% 
+% 
+% 
+% Our main result, \cref{product_structure_result} below, is a more general results for graphs having \emph{product structure} and implies that any $k$-planar graph has a proper odd colouring using $O(k^5)$ colours.
+% 
+% % \begin{thm}\label{old_result}
+% %   Let $\mathcal{H}$ be a $d$-degenerate minor closed family of graphs and let $H$ be a member of $\mathcal{H}$ with no isolated vertices.  Then $H$ has a proper odd colouring $\varphi:V(H)\to\{1,\ldots,2d+1\}$.
+% % \end{thm}
 
-\section{Layered Decompositions}
+\section{Layered Treewidth (Proof of \cref{layered_treewidth_result})}
+\label{layered_treewidth}
 
-For a graph $G$, let $\odd(G)$ denote the minimum number of colours used by any proper odd colouring of $G$.
+We begin with an easy observation that allows us to perform divide-and-conquer:
 
-\begin{obs}
+\begin{obs}\label{partition}
   Let $G$ be a graph and let $\{V_1,\ldots,V_d\}$ be a partition of $V(G)$ such that, for each $i\in\{1,\ldots,d\}$, $G[V_i]$ has no isolated vertices.  Then $\odd(G) \le \sum_{i=1}^d \odd(G[V_i])$.
 \end{obs}
 
@@ -146,10 +168,10 @@ For a graph $G$, let $\odd(G)$ denote the minimum number of colours used by any 
   \end{compactitem}
 \end{proof}
 
+A \emph{layering} $\mathcal{L}:=L_1,\ldots,L_h$ of a graph $G$ is a partition of $V(G)$ into a sequence of sets such that, for each edge $vw$ of $G$, $v\in L_i$, $w\in L_j$ implies that $|i-j|\le 1$.  For convenience, we will use the convention that $L_i:=\emptyset$ for each $i < 1$ and each $i> h$.  We say that $\mathcal{L}$ is \emph{$(\ell,c)$-good} if, for each $i\in\{1,\ldots,h\}$ and each subgraph $G'$ of $G[L_i\cup\cdots\cup L_{i+\ell-1}]$, $\odd(G')\le c$.
 
-A \emph{layering} $\mathcal{L}:=L_1,\ldots,L_h$ of a graph $G$ is a partition of $V(G)$ into a sequence of sets such that, for each edge $vw$ of $G$, $v\in L_i$, $w\in L_j$ implies that $|i-j|\le 1$.  For convenience, we will use the convention that $L_i:=\emptyset$ for each $i < 1$ and each $i> h$.  We say that $\mathcal{L}$ is \emph{$(\ell,c)$-good} if, for each $i\in\{1,\ldots,h\}$ and each subgraph $G'$ of $G[L_i\cup\cdots\cup L_{i+c-1}]$, $\odd(G')\le c$.
 
-\begin{lem}\label{partition}
+\begin{lem}\label{four_good}
   If a graph $G$ has a $(4,c)$-good layering then $\odd(G)\le 2c$.
 \end{lem}
 
@@ -168,74 +190,83 @@ A \emph{layering} $\mathcal{L}:=L_1,\ldots,L_h$ of a graph $G$ is a partition of
   Therefore, for each $i\in\{1,2\}$, each component of $G_i$ is a subgraph of $G[L_j\cup\cdots\cup L_{j+3}]$ for some $j\in\{1,\ldots,h-3\}$.  Since $G$ is $(4,c)$-good, this implies that $\odd(G_i)\le c$.  Therefore, by \cref{partition}, $\odd(G)\le \odd(G_1)+\odd(G_2)\le 2c$.
 \end{proof}
 
-\begin{lem}
+With \cref{four_good} in hand, we can now easily prove \cref{layered_treewidth_result}, but first we should define all the terms used in \cref{layered_treewidth_result}.  
+
+A \emph{tree decomposition} $\mathcal{T}:=(B_x:x\in V(T))$ of a graph $G$ is a sequence of subsets of $V(G)$ called \emph{bags} that are indexed by the nodes of a tree $T$ and such that, 
+\begin{inparaenum}[(i)]
+  \item for each vertex $v$ of $G$, $T[x\in V(T):v\in B_x]$ is connected; and
+  \item for each edge $vw$ of $G$, ther exists a node $x$ of $T$ such that $\{v,w\}\subseteq B_x$.
+\end{inparaenum}
+The \emph{width} of a tree decomposition is equal to the size of its largest bag, minus $1$.  The \emph{treewidth} of $G$ is the minimum width of any tree decomposition of $G$.
+
+A \emph{layered tree decomposition} of $G$ is a pair $(\mathcal{L},\mathcal{T})$ where $\mathcal{L}:=V_0,\ldots,V_h$ is a layering of $G$ and $\mathcal{T}:=(B_x:x\in V(T))$ is a tree decomposition of $G$.  The \emph{layered width} of $(\mathcal{L},\mathcal{T})$ is $\max\{|L_j\cap B_x|:j,x\in\{0,\ldots,h\}\times V(T)\}$.  The \emph{layered treewidth} of $G$ is the minimum layered width of any layered tree decomposition of $G$.
+
+\begin{proof}[Proof of \cref{layered_treewidth_result}]
+  Let $\mathcal{L}:=L_1,\ldots,L_h$ and $\mathcal{T}:=(B_x:x\in v(T))$ be a layering and tree decomposition of $G$ such that the layered width of $(\mathcal{L},\mathcal{T})$ is at most $t$.  Then, for any $i\in\{1,\ldots,h-3\}$, $(B_x\cap(L_i\cup\cdots\cup L_{i+3}):x\in V(T))$ is a tree decomposition of $G[L_i\cup\cdots\cup L_{i+3}]$ whose largest bag has size at most $4t$.  Therefore, the treewidth of $G[L_i\cup\cdots\cup L_{i+3}]$ is at most $4t-1$.  The class of graphs of treewidth $4t-1$ is a $(4t-1)$-degenerate minor-closed family of graphs.  Therefore, by \cref{degenerate}, $\odd(G[L_i\cup\cdots\cup L_{i+3}])\le 8t-1$.  Therefore $G$ is $(4,8t-1)$-good so, by \cref{four_good}, $\odd(G)\le 16t-2$.
+\end{proof}
+
+\subsection{A Digression}
+
+\cref{four_good} shows that if $G$ is $(4,c)$-good then $\odd(G)$ is upper bounded by a function of $c$.  This leads to the following question:  ``What is the minimum value of $\ell$ such that any $(\ell,c)$-good graph $G$ has $\odd(G)$ upper bounded by a function of $c$?''  As it turns out, the answer is $2$, as the following results show.
+
+\begin{lem}\label{three_good}
   If a graph $G$ has a $(3,c)$-good layering then $\odd(G)\le 3c$.
 \end{lem}
 
-\begin{lem}
-  If a graph $G$ has a layering that is simultaneously $(3,c_3)$-good and $(4,c_4)$-good then $\odd(G)\le c_3+c_4$.
-\end{lem}
-
+\begin{proof}
+  This proof is similar to the proof of \cref{four_good}, but partitions $G$ into three graphs $G_0$, $G_1$, and $G_2$.  We may assume that $G$ has no isolated vertices. Let $\mathcal{L}:=L_1,\ldots,L_h$ be a $(3,c)$-good layering of $G$. For each $i\in\{0,1,2\}$, let $X_i:=\cup\{L_j:j\equiv i\pmod 3\}$.  
+  
+  Let $I_{01}$ be the set of isolated vertices in $G[X_0\cup X_1]$ and define $Y_2:=X_2\cup I_{01}$.  Let $I_2$ be the set of isolated vertices in $G[Y_2]$, let $V_2:=Y_2\setminus I_2$ and let $\overline{V}_2:=V(G)\setminus V_2$.  Observe that neither $G[V_2]$ nor $G[\overline{V}_2]$ has isolated vertices.
+  
+  Let $I_1$ be the set of isolated vertices in $G[X_1\setminus V_2]$ and observe that every vertex $v$ in $I_1$ is adjacent, in $G$ to some vertex $w$ in $X_0\setminus V_2$.  Let $Y_0:=(X_0\setminus V_2)\cup I_1$ and let $I_0$ be the set of isolated vertices in $G[Y_0]$.  Let $V_0:=Y_0\setminus I_0$ and let $V_1:=V(G)\setminus(V_0\cup V_2)$.  It is straightforward to verify that neither $G[V_0]$ nor $G[V_1]$ has isolated vertices.
+  
+  We claim that, for reach $i\in\{0,1,2\}$, each component of $G[V_i]$ contains vertices from at most $3$ consecutive layers of $\mathcal{L}$.  Indeed, otherwise such a component contains an edge $vw$ with $v\in L_a$ and $w\in L_{a+1}$ where $a\not\equiv i\pmod 3$ and $a+1\not\equiv i\pmod 3$.  If $i=2$, this is not possible because neither $v$ nor $w$ is an isolated vertex of $G[X_0\cup X_1]$.  If $i=0$ or $i = 1$ this is not possible because it would imply that one of $v$ or $w$ is in $V_2$.
+  
+  Therefore, since $G$ is $(3,c)$ good, $\odd(G[V_i])\le c$ for each $i\in\{0,1,2\}$ so, by \cref{partition}, $\odd(G)\le 3c$.
+\end{proof}
 
 \begin{lem}
   If a graph $G$ has a layering that is $(2,c)$-good then $\odd(G)\le c^2$.
 \end{lem}
 
-
-
-
-\begin{lem}\label{four_layer}
-  Let $G$ be a graph and let $\mathcal{L}:=L_1,\ldots,L_h$ be a layering of $G$ with the property that, for each odd $i\in\{1,\ldots,h\}$, every subgraph of $G[\bigcup_{j=i-1}^{i+2}L_{j}]$ has an odd colouring using at most $c$ colours. Then $G$ has odd chromatic number at most $2c$.
-\end{lem}
-
-A \emph{layered tree decomposition} of $G$ is a pair $(\mathcal{L},\mathcal{T})$ where $\mathcal{L}:=V_0,\ldots,V_h$ is a layering of $G$ and $\mathcal{T}:=(B_x:x\in V(T))$ is a tree decomposition of $G$.  The \emph{width} of $(\mathcal{L},\mathcal{T})$ is $\max\{|L_j\cap B_x|:j,x\in\{0,\ldots,h\}\times V(T)\}$.  The \emph{layered treewidth} of $G$ is the minimum width over all possible layered tree decompositions of $G$.
-
-
-\begin{cor}\label{layered_treewidth}
-  Let $G$ be a graph of layered treewidth at most $t$.  Then $G$ has odd chromatic number at most $16t-2$.
-\end{cor}
-
 \begin{proof}
-  By the definition of layered treewidth, $G[\bigcup_{j=i-1}^{i+2}L_{j}]$ has a tree decomposition in which each bag contains at most $4t$ vertices and therefore has treewidth at most $4t-1$.  The family of graphs with treewidth at most $4t-1$ is a $(4t-1)$-degenerate minor-closed family so, by the result of \citet{cranston.XX}, $G[\bigcup_{j=i-1}^{i+2}L_{j}]$ has an odd colouring using at most $c:=2(4t-1)+1=8t-1$ colours.  Therefore, by \cref{four_layer} $G$ has an odd colouring using at most $2c=16t-2$ colours.
+  Let $\mathcal{L}:=L_1,\ldots,L_h$ be a $(2,c)$-good layering of $G$.  Let $G_0$ be the (not necessarily induced) subgraph of $G$ that contains each edge $vw$ of $G$ such that $v\in L_i$ for some even integer $i$ and $w\in L_i\cup L_{i+1}$.  Similarly, let $G_1$ be the subgraph of $G$ that contains each edge $vw$ of $G$ such that $v\in L_i$ for some odd integer $i$ and $w\in L_i\cup L_{i+1}$.  Observe that $E(G_0)$ and $E(G_1)$ form a partition of $E(G)$.  Therefore, for any non-isolated vertex $v$ of $G$, $v$ is non-isolated in at least one of $G_0$ or $G_1$.  Furthermore, for each $i\in\{0,1\}$, each component of $G_i$ contains vertices from at most $2$ consecutive layers of $\mathcal{L}$.  Since $\mathcal{L}$ is $2$-good, there exists a proper odd colouring $\varphi_i:V(G_i)\to\{1,\ldots,c\}$ of $G_i$.  For each $j\in\{1,\ldots,h\}$ and each $v\in L_j$, define $\varphi_2(v):= j\bmod 3$ and define $\varphi(v):=(\varphi_2(v),\varphi_1(v),\varphi_0(v))$. 
+  
+  Then $\varphi$ is a colouring of $G$ that uses at most $3c^2$ colours.  To see that $\varphi$ is a proper colouring of $G$ recall that each edge $vw$ of $G$ is an edge of $G_i$ for some $i\in\{0,1\}$, so $\varphi_i(v)\neq\varphi_i(w)$ which implies that $\varphi(v)\neq\varphi(w)$.  To see that $\varphi$ is an odd colouring of $G$, recall that each vertex $v$ of $G$ is non-isolated in $G_i$ for some $i\in\{0,1\}$.  Without loss of generality, assume that $v$ is non-isolated in $G_0$, so some colour $\alpha$ appears an odd number of times in the multiset $\{\{\varphi_i(w):w\in N_{G_0}(v)\}\}$. Therefore, some colour $(\beta,\alpha)$ appears an odd number of times in the multiset $\{\{(\varphi_1(w),\varphi_{0}(w)):w\in N_{G_0}(v)\}\}$.
+  
+  Now, the colour $(\beta,\alpha)$ may also appear arbitrarily many times in the multiset $\{\{(\varphi_1(w'),\varphi_{0}(w')):w\in N_{G_{1}}(v)\}\}$.  However, for each $w'\in N_{G_{1}}(v)$ and each $w\in N_{G_0}(v)$, $\varphi_2(w')\neq \varphi_2(w)$.  Therefore, there exists a colour $\gamma\in\{0,1,2\}$ such that $(\gamma,\beta,\alpha)$ appears an odd number of times in the multiset $\{\{(\varphi_2(w),\varphi_1(w),\varphi_{0}(w)):w\in N_{G}(v)\}\}$.  Therefore $\gamma$ is an odd colouring of $G$.
 \end{proof}
 
-\citet{dujmovic.eppstein.ea:genus} prove that any $k$-planar graph $G$ has layered treewidth $t\le 6k+1$.  Together with \cref{layered_treewidth}, this immediately implies the following corollary:
-
-\begin{cor}\label{k_planar}
-  Let $G$ be a $k$-planar graph.  Then $G$ has odd chromatic number at most $96k+14$.
-\end{cor}
-
-\begin{lem}\label{three_layer}
-  Let $G$ be a graph and let $\mathcal{L}:=L_0,\ldots,L_h$ be a layering of $G$ with the property that, for each $i$, every subgraph of $G[\bigcup_{j=i-1}^{i+1}L_{j}]$ has an odd colouring using at most $c$ colours. Then $G$ has an odd colouring using at most $3c$ colours.
-\end{lem}
-
-
-
-
-
-\begin{thm}
-  Let $G$ be a graph with layered treewidth $t$.  Then $G$ has an odd colouring using at most $18t+O(1)$ colours.
-\end{thm}
-
-
-
-
-
-\section{Graphs with Product Structure}
-
-\begin{thm}\label{new_result}
-  Let $H$ be a $t$-tree, let $P$ be a path, and let $G$ be a subgraph of $H\boxtimes P$. Then the odd chromatic index of $G$ is at most $8t+4$.
-\end{thm}
+\begin{obs}
+  For each $q\in\N$, there exists a graph $G$ with a $(1,1)$-good layering such that $\odd(G)\ge q$.
+\end{obs}
 
 \begin{proof}
-  Let $y_1,\ldots,y_h$ be the vertices of $P$, in order.  To avoid a boring edge case, we extend $P$ by one vertex in each direction, so that the vertices $y_0$ and $y_{h+1}$ are defined.
+  Let $G_0$ be any graph whose chromatic number is at least $q$ and let $G$ be obtained from $G_0$ by subdividing each each exactly once.  Then $G$ is bipartite and therefore has a layering $\mathcal{L}:=L_1,L_2$ in which $G[L_1]$ and $G[L_2]$ each have no edges, $\odd(G[L_1])=\odd(G[L_2])=1$, so $\mathcal{L}$ is a $(1,1)$-good layering of $G$.  Furthermore, in any odd colouring $\varphi$ of $G$, each subdivision vertex $x$ must be adjacent to two vertices $v$ and $w$ of different colours.  But for any edge $vw$ of $G_0$ there is a subdivision vertex $x$ with $N_G(x)=\{v,w\}$, so $\varphi(v)\neq\varphi(w)$.  Therefore $\varphi$ is a proper colouring of $G_0$, so $\varphi$ uses at least $q$ colours.
+\end{proof}
 
-  Let $x_1,\ldots,x_r$ be the vertices of $H$ ordered so that $x_1,\ldots,x_{t}$ is a clique and, for each $i\in\{t+1,\ldots,r\}$, the vertices in $C_{x_i}:=N_G(x_i)\cap\{x_1,\ldots,x_{i-1}\}$ form a clique of order $t$.  We make crucial use of the following well-known property of $t$-trees:\footnote{(\ding{74}) follows from the fact that $S:=C_{x_i}\cup\{x_i\}$ separates $\{x_1,\ldots,x_i\}\setminus S$ from $x_{i'}$.  In the language of rooted tree-decompositions, the node whose bag contains $S$ is an ancestor of all nodes whose bags contains $x_{i'}$.}
+\section{Product Structure (Proof of \cref{product_structure_result})}
+\label{product_structure}
+
+For two graphs $A$ and $B$, the \emph{strong product} $A\boxtimes B$ of $A$ and $B$ is the graph with vertex set $V(A\boxtimes B):=V(A)\times V(B)$ and that contains an edge with endpoints $(x_1,y_1)$ and $(x_2,y_2)$ if and only if
+\begin{inparaenum}[(i)]
+  \item $x_1x_2\in E(A)$ and $y_1=y_2$;
+  \item $x_1=x_2$ and $y_1y_2\in E(B)$; or
+  \item $x_1x_2\in E(A)$ and $y_1y_2\in E(B)$.
+\end{inparaenum}
+A \emph{$t$-tree} $H$ is a graph that is either a clique on $t+1$ vertices or a graph that contains a vertex $v$ of degree $t$ whose neighbours form a clique and such that $H-\{v\}$ is a $t$-tree. 
+
+Our proof of \cref{product_structure_result} is inspired by the proof \cref{degenerate} by \citet{cranston.lafferty.ea:note}, which is an inductive proof that involves contracting an edge $wv$ incident to a vertex $v$ of degree at most $d$.  The contraction of this edge (as opposed to the deletion of $v$) is crucial to ensuring that $N_G(v)$ has a colour (namely $\varphi(w)$) that appears an odd number of times.  However, since the class of graphs with product structure is not minor-closed we can not use edge contractions. Instead, we use vertex deletion along with a condition labelled (\ding{96}) to achieve a similar effect.
+
+\begin{proof}
+  Let $\ell:V(G)\to\binom{\N}{8t+4}$ be an $(8t+4)$-list assignment of $G$, so our job is to construct a proper odd colouring $\varphi$ that respects $\ell$.  Let $y_1,\ldots,y_h$ be the vertices of $P$, in order.  To avoid a boring edge case, we extend $P$ by one vertex in each direction, so that the vertices $y_0$ and $y_{h+1}$ are defined.
+
+  Let $x_1,\ldots,x_r$ be the vertices of $H$ ordered so that $x_1,\ldots,x_{t}$ is a clique and, for each $i\in\{t+1,\ldots,r\}$, the vertices in $C_{x_i}:=N_G(x_i)\cap\{x_1,\ldots,x_{i-1}\}$ form a clique of order $t$.  We make crucial use of the following well-known property of $t$-trees:\footnote{(\ding{74}) follows from the fact that $S:=C_{x_i}\cup\{x_i\}$ separates $\{x_1,\ldots,x_i\}\setminus S$ from $x_{j}$.  In the language of rooted tree-decompositions, the node whose bag contains $S$ is an ancestor of all nodes whose bags contains $x_{j}$.}
   \begin{compactitem}[(\ding{74})]
     \item If $1\le i \le j\le r$ and $x_i \in C_{x_{j}}$ then $C_{x_i}\cup\{x_i\}\supseteq C_{x_{j}}\cap\{x_1,\ldots,x_{i}\}$.
   \end{compactitem}
 
-  With this setup out of the way, we can proceed with the proof, which is by induction on the number of vertices of $G$.  We will prove the following stronger statement:  There exists a proper odd colouring $\varphi:V(G)\to\{1,\ldots,8t+4\}$ of $G$ that satisifies the following additional condition:
+  With this setup out of the way, we can proceed with the proof, which is by induction on the number of vertices of $G$.  We will prove the following stronger statement:  There exists a proper odd colouring $\varphi$ of $G$ that respects $\ell$ and that also satisifies the following condition:
   \begin{compactitem}[(\ding{96})]
     \item For each $(x_i,y_j)\in V(H\boxtimes P)$, define
     \[
@@ -260,7 +291,7 @@ A \emph{layered tree decomposition} of $G$ is a pair $(\mathcal{L},\mathcal{T})$
 
     Furthermore, if $v$ is not an isolated vertex of $G$ then (\ding{96}) ensures that some colour occurs exactly once in $N_G(v)$. Therefore, to ensure that $\varphi$ is an odd colouring of $G$, we need only choose some $\varphi(v)\not\in X$ in such a way that some colour appears an odd number of times in $N_G(w)$ for each $w\in N_G(v)$, which is what we do next.
 
-    \item To guarantee that $\varphi$ is an odd colouring of $G$, consider each vertex $w\in N_{G}(v)$.  If there is exactly one colour $\alpha\in\{1,\ldots,8t+4\}$ that occurs an odd number of times in $N_{G'}(w)$, then define $Y_{w} := \{\alpha\}$; otherwise define $Y_{w}:=\emptyset$. Now let $Y:=\bigcup_{w\in N_{G}(v)} Y_{w}$ and observe that $|Y|\le |N_G(v)|\le 3t+1$.
+    \item To guarantee that $\varphi$ is an odd colouring of $G$, consider each vertex $w\in N_{G}(v)$.  If there is exactly one colour $\alpha$ that occurs an odd number of times in $N_{G'}(w)$, then define $Y_{w} := \{\alpha\}$; otherwise define $Y_{w}:=\emptyset$. Now let $Y:=\bigcup_{w\in N_{G}(v)} Y_{w}$ and observe that $|Y|\le |N_G(v)|\le 3t+1$.
     If we choose $\varphi(v)\not\in Y$ then , for each $w\in N_{G}(v)$ the following holds:
     \begin{itemize}
       \item If $Y_{w}=\{\alpha\}$ then $\varphi(v)\neq\alpha$. Therefore, the colour $\alpha$ appears an odd number of times in $N_{G}(w)$ since it appears an odd number of times in $N_{G'}(w)=N_G(w)\setminus\{v\}$.
@@ -271,29 +302,28 @@ A \emph{layered tree decomposition} of $G$ is a pair $(\mathcal{L},\mathcal{T})$
       \end{itemize}
     \end{itemize}
   \end{itemize}
-  Therefore, by choosing $\varphi(v)\not\in X\cup Y$ we obtain an odd colouring of $G$ that satisifies (\ding{96}).  Since $|X\cup Y|\le |X|+|Y|\le 8t+3$, there exists some $\varphi(v)\in \{1,\ldots,8t+4\}\setminus(X\cup Y)$ that completes the colouring of $G$.
+  Therefore, by choosing $\varphi(v)\not\in X\cup Y$ we obtain an odd colouring of $G$ that satisifies (\ding{96}).  Since $|X\cup Y|\le |X|+|Y|\le 8t+3 < |\ell(v)|$, there exists some $\varphi(v)\in\ell(v)\setminus(X\cup Y)$ that completes the colouring of $G$.
 \end{proof}
 
 
 \subsection{Remarks}
 
-Our proof of \cref{new_result} is inspired by the proof of the result on $d$-degenerate minor-closed families of \citet{cranston.lafferty.ea:note}, which is an inductive proof that involves contracting an edge $wv$ incident to a vertex $v$ of degree at most $d$.  The contraction of this edge (as opposed to the deletion of $v$) is crucial to ensuring that $N_G(v)$ has a colour (namely $\varphi(w)$) that appears an odd number of times.  However, since the class of graphs with product structure is not minor-closed we can not use edge contractions. Instead, we use vertex deletion along with condition (\ding{96}) to achieve a similar effect.
+% 
+% One might hope that \cref{product_structure_result} could be generalized to the setting in which $H$ belongs to some $t$-degenerate minor-closed family of graphs.  However, bounding the size of the set $X$ required to maintain (\ding{96}) when choosing $\varphi(v)$ relies critically on (\ding{74}), which is a property of graphs of treewidth $t$ that is not true for all $t$-degenerate minor-closed graph families.
 
-One might hope that \cref{new_result} could be generalized to the setting in which $H$ belongs to some $t$-degenerate minor-closed family of graphs.  However, bounding the size of the set $X$ required to maintain (\ding{96}) when choosing $\varphi(v)$ relies critically on (\ding{74}), which is a property of graphs of treewidth $t$ that is not true for all $t$-degenerate minor-closed graph families.
+% \paragraph{Subgraphs of $H\boxtimes P\boxtimes K_\ell$}
 
-\paragraph{Subgraphs of $H\boxtimes P\boxtimes K_\ell$}
+A number of product structure theorems characterize graphs as subgraphs of $H\boxtimes P\boxtimes K_{\ell}$ where $H$ is a $t$-tree, $P$ is a path, and $K_\ell$ is a complete graph of order $\ell$.  Since $H\boxtimes P\boxtimes K_{\ell}$ is isomorphic to $H\boxtimes K_\ell\boxtimes P$ and $H\boxtimes K_\ell$ is a $(\ell(t+1)-1)$-tree, \cref{product_structure_result} immediately implies that these graphs have odd colourings using $8\ell t+8\ell-4$ colours.
 
-A number of product structure theorems characterize graphs as subgraphs of $H\boxtimes P\boxtimes K_{\ell}$ where $H$ is a $t$-tree, $P$ is a path, and $K_\ell$ is a complete graph of order $\ell$.  Since $H\boxtimes P\boxtimes K_{\ell}$ is isomorphic to $H\boxtimes K_\ell\boxtimes P$ and $H\boxtimes K_\ell$ is a $(\ell(t+1)-1)$-tree, \cref{new_result} immediately implies that these graphs have odd colourings using $8\ell t+8\ell-4$ colours.
+It is possible to improve this slightly by redoing the proof \cref{product_structure_result}.  In this case, the vertex $v:=(x_i,y_j,z_k)$ that is removed is also chose to maximize $(i,j)$, with ties broken arbitrarily. Then one finds that the sizes of the colour sets $X$ and $Y$ that must be avoided when choosing $\varphi(v)$ are bounded by $|X|\le 5\ell t + 3\ell-1$ and $|Y|\le 3\ell t + 2\ell -1$ so that $|X\cup Y|\le 8\ell t + 5\ell -2$. This gives the following variant of \cref{product_structure_result}:
 
-It is possible to improve this slightly by redoing the proof \cref{new_result}.  In this case, the vertex $v:=(x_i,y_j,z_k)$ that is removed is also chose to maximize $(i,j)$, with ties broken arbitrarily. Then one finds that the sizes of the colour sets $X$ and $Y$ that must be avoided when choosing $\varphi(v)$ are bounded by $|X|\le 5\ell t + 3\ell-1$ and $|Y|\le 3\ell t + 2\ell -1$ so that $|X\cup Y|\le 8\ell t + 5\ell -2$. This gives the following variant of \cref{new_result}:
-
-\begin{thm}\label{new_result_kl}
-  Let $H$ be a $t$-tree, let $P$ be a path, let $K_\ell$ be a clique on $\ell$ vertices, and let $G$ be a subgraph of $H\boxtimes P\boxtimes K_\ell$.  Then $G$ has a proper odd colouring using at most $8\ell t + 5\ell -1$ colours.
+\begin{thm}\label{product_structure_result_kl}
+  If $G$ is a subgraph of $H\boxtimes P\boxtimes K$, where $H$ is a $t$-tree, $P$ is a path, and $K$ is a clique of order $\ell$, then $\oddc(G)\le 8\ell t + 5\ell -1$.
 \end{thm}
 
-\paragraph{Subgraphs of $H\boxtimes I$}
+% \paragraph{Subgraphs of $H\boxtimes I$}
 
-Perhaps a more interesting generalization comes by replacing $P$ by some graph $I$ of maximum-degree $\Delta$.  Again, one can follow the same general strategy used in the proof of \cref{new_result}, with the following changes.
+Perhaps a more interesting generalization comes by replacing $P$ by some graph $I$ of maximum-degree $\Delta$.  Again, one can follow the same general strategy used in the proof of \cref{product_structure_result}, with the following changes.
 \begin{compactitem}
   \item The vertices $y_1,\ldots,y_h$ are the vertices of $I$ is no particular order.
   \item The set $C_{(x_i,y_i)}$ is defined as
@@ -302,28 +332,28 @@ Perhaps a more interesting generalization comes by replacing $P$ by some graph $
 \]
   \item $|X\cup Y|$ is bounded as follows: $|Y|\le|N_G(v)|\le |C_v\setminus\{v\}| \le (t+1)(\Delta+1)-1$.  The set $R$ used to define $X$ is given by $R:=(\{x_i\}\cup C_{x_i})\times N^2_I(y_i)$, where $N^2_I(y_i)$ denotes the set of at most $\Delta^2+1$ vertices in $I$ of distance at most $2$ from $y_i$.  Then $|X|\le|R\setminus\{v\}|\le (t+1)(\Delta^2+1)-1$.  Therefore $|X\cup Y|\le |X|+|Y|\le (\Delta^2+\Delta)(t+1)+2t$.
 \end{compactitem}
-These changes prove the following variation of \cref{new_result}:
+These changes prove the following variation of \cref{product_structure_result}:
 
-\begin{thm}\label{new_result_delta}
-  Let $H$ be a $t$-tree, let $I$ be a graph of maximum-degree $\Delta$, and let $G$ be a subgraph of $H\boxtimes I$.  The $G$ has a proper odd colouring using at most $(\Delta^2+\Delta)(t+1)+2t+1$ colours.
+\begin{thm}\label{product_structure_result_delta}
+  If $G$ is a subgraph of $H\boxtimes I$ where $H$ is a $t$-tree and $I$ is a graph of maximum-degree $\Delta$, then $\oddc(G)\le(\Delta^2+\Delta)(t+1)+2t+1$.
 \end{thm}
 
 
 
 %
-% We conclude by noting that the proof of \cref{new_result} can easily be modified to prove the following refinement:
+% We conclude by noting that the proof of \cref{product_structure_result} can easily be modified to prove the following refinement:
 %
 % \todo[inline]{We have to rethink this next part now.}
-% \begin{thm}\label{new_result2}
+% \begin{thm}\label{product_structure_result2}
 %   Let $H$ be a $t$-tree, let $B$ be a $d$-degenerate\footnote{A graph $G$ is $d$-degenerate if every subgraph of $G$ contains a vertex of degree at most $d$.} graph of maximum-degree $\Delta$, and let $G$ be a subgraph of $H\boxtimes B$. Then $G$ has a proper odd colouring $\varphi:V(H)\to\{1,\ldots,2((\Delta+1)t + d)+1\}$.
 % \end{thm}
 %
-% The proof of \cref{new_result2} is almost identical to the proof of \cref{new_result} except for the following modifications:  Let $y_1,\ldots,y_h$ be an ordering of $V(B)$ for which $|N_B(y_j)\cap\{y_1,\ldots,y_{j}\}|\le d$ for each $j\in\{1,\ldots,h\}$ and let $C_{y_j}:=N_B(y_j)\cap\{y_1,\ldots,y_{j}\}$.  Then the definition of $C_{x_i,y_j}$ becomes
+% The proof of \cref{product_structure_result2} is almost identical to the proof of \cref{product_structure_result} except for the following modifications:  Let $y_1,\ldots,y_h$ be an ordering of $V(B)$ for which $|N_B(y_j)\cap\{y_1,\ldots,y_{j}\}|\le d$ for each $j\in\{1,\ldots,h\}$ and let $C_{y_j}:=N_B(y_j)\cap\{y_1,\ldots,y_{j}\}$.  Then the definition of $C_{x_i,y_j}$ becomes
 % \[
 %    C_{x_i,y_j} := V(G)\cap \left( (C_{x_i}\times (\{y_j\}\cup N_B(y_j)))
 %        \cup \{(x_i,y): y \in C_{y_j}\}  \right) \enspace .
 % \]
-% As before the vertex $v:=(x_i,y_j)\in V(G)$ is chosen so that $(i,j)$ is lexicographically maximum.  With this choice of $v$,  $N_G(v)\subseteq C_v$, so $|N_G(v)|\le (\Delta+1)t+d$. Since $|X|\le |C_v|$ and $|Y|\le |N_G(v)|$, this means there are at most $2((\Delta+1)t+d)$ colours that must be avoided when choosing $\varphi(v)$, so $2((\Delta+1)t+d)+1$ colours are sufficient. \Cref{new_result} is a consequence of \cref{new_result2} because a path $P$ is a graph with maximum degree $\Delta=2$ and degeneracy $d=1$.
+% As before the vertex $v:=(x_i,y_j)\in V(G)$ is chosen so that $(i,j)$ is lexicographically maximum.  With this choice of $v$,  $N_G(v)\subseteq C_v$, so $|N_G(v)|\le (\Delta+1)t+d$. Since $|X|\le |C_v|$ and $|Y|\le |N_G(v)|$, this means there are at most $2((\Delta+1)t+d)$ colours that must be avoided when choosing $\varphi(v)$, so $2((\Delta+1)t+d)+1$ colours are sufficient. \Cref{product_structure_result} is a consequence of \cref{product_structure_result2} because a path $P$ is a graph with maximum degree $\Delta=2$ and degeneracy $d=1$.
 
 \bibliographystyle{plainurlnat}
 \bibliography{odd}
