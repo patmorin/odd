@@ -127,7 +127,7 @@ For graphs of bounded layered treewidth we establish bounds on the odd chromatic
 % \citet[Theorem 10]{dujmovic.eppstein.ea:genus} show that every $k$-planar graph has layered treewidth at most $6(k+1)$.
 
 % More generally,
-A graph is \emph{$(g,k)$-planar graph} if it has an embedding on a surface of Euler genus $g$ in which each edge is involved in at most $k$ crossings with other edges.  Thus, a graph is $k$-planar if and only if it is $(0,k)$-planar.  \citet[Theorem 13]{dujmovic.eppstein.ea:genus} show that every $(g,k)$-planar graph has layered treewidth at most $(4g+6)(k+1)$.  Along with \cref{layered_treewidth}, this immediately implies the following result, and the special case in which $g=0$ provides the general result suggested by \citet{cranston.lafferty.ea:note}.
+A graph is \emph{$(g,k)$-planar graph} if it has an embedding on a surface of Euler genus $g$ in which each edge is involved in at most $k$ crossings with other edges.  Thus, a graph is $k$-planar if and only if it is $(0,k)$-planar.  \citet[Theorem~13]{dujmovic.eppstein.ea:genus} show that every $(g,k)$-planar graph has layered treewidth at most $(4g+6)(k+1)$.  Along with \cref{layered_treewidth_result}, this immediately implies the following result, and the special case in which $g=0$ provides the result for $k$-planar graphs suggested by \citet{cranston.lafferty.ea:note}.
 
 % \begin{cor}\label{k_planar}
 %   If $G$ is a $k$-planar graph then $\odd(G)\le 96k+94$.\todo{Drop this and only keep the $(g,k)$-planar version?}
@@ -137,13 +137,36 @@ A graph is \emph{$(g,k)$-planar graph} if it has an embedding on a surface of Eu
   If $G$ is a $(g,k)$-planar graph then $\odd(G)\le 64g(k+1)+96k+94$.
 \end{cor}
 
+Several other non-minor closed families of graphs are known to have bounded layered treewidth, including $(g,d)$-map graphs, $(g,\delta)$-string graphs, and ($2$-dimensional) $r$-nearest neighbour graphs.\footnote{Graphs in these classes are $(g,k)$-planar for some $k$ that depends on $d$, $\delta$, or $r$.  However, it is usually possible to obtain tighter bounds on layered treewidth using direct arguments rather than just apply \cref{gk_planar}.}  \cref{layered_treewidth_result} gives bounds on the odd chromatic number for all graphs in these classes.
+
 Like other colouring problems, odd colouring can also be studied through the lens of list-colouring/choosability.  A \emph{$c$-list assignment} of a graph $G$ is a function $L:V(G)\to\binom{\N}{c}$ that assigns to each vertex $v$ of $G$ a set $L(v)$ of $c$ colours.  We say that a colouring $\varphi$ of $G$ is an $L$-coloring if $\varphi(v)\in L(v)$ for each vertex $v$ of $G$.  The \emph{odd choice number} $\oddc(G)$ of $G$ is the minimum value of $c$ such that, for any $c$-list assignment $L$ of $G$, $G$ has a proper odd $L$-colouring. Clearly $\odd(G)\le \oddc(G)$ for any graph $G$ since, by taking $L(v):=\{1,\ldots,c\}$ for each $v\in V(G)$, any $L$-colouring of $G$  uses at most $c$ colours.  The proof given by \citet{cranston.lafferty.ea:note} applies, without modification to this setting:
 
 \begin{thm}[\citet{cranston.lafferty.ea:note}]\label{degenerate}
   If $G$ belongs to a $d$-degenerate minor-closed family of graphs then $\oddc(G)\le 2d+1$.
 \end{thm}
 
-For graphs with product structure, we are able to establish stronger bounds on the odd choice number.
+\todo[inline]{
+Chun-Hung suggests the following, but I'm not sure we should add an entire section just to repeat someone else's proof.  We could just include the 1-paragraph proof right here(?)
+
+13. Add a new section called "preliminary" or something else before the
+current Section 2. In this section, first state Theorem 1 (i.e. the
+lemma of Cranston et al) and state the following lemma:
+
+Lemma: Let $d$ be a nonnegative integer and ${\mathcal F}$ a
+$d$-degenerate minor-closed family. If $G$ is a graph in ${\mathcal F}$
+and $L$ is a $(2d+1)$-list-assignment of $G$, then $G$ has a proper odd
+$L$-coloring.
+
+And say that our proof of above lemma is based on the same idea of
+identical to the proof in the paper of Cranston et al, but we include
+the proof for completeness.
+
+After the proof, state the corollary by using the language of odd choice
+number. And say the odd choice number of planar graphs, bounded
+treewidth graphs etc is at most something by choosing the correct d.
+}
+
+Graphs with product structure are special cases of graphs with bounded layered treewidth. We can improve the bound in \cref{layered_treewidth_result} for those cases, even for the odd choice number.
 
 \begin{thm}\label{product_structure_result}
   If $G$ is a subgraph of $H\boxtimes P$ where $H$ is a graph of treewidth at most $t$ and $P$ is a path then $\oddc(G)\le 8t+4$.
@@ -155,7 +178,7 @@ For graphs with product structure, we are able to establish stronger bounds on t
   If $G$ is a $k$-planar graph then $\oddc(G)\in O(k^5)$.
 \end{cor}
 
-
+A graph $G$ that satisfies the requirements of \cref{product_structure_result} is said to have \emph{row treewidth} at most $t$.  Again, several other non-minor-closed families of graphs are known to have bounded row treewidth, including $k$-gap planar graphs, $(g,d)$-map graphs, $(g,\delta)$-string graphs, ($2$-dimensional) $r$-nearest neighbour graphs, and powers of bounded-degree graphs from proper minor-closed families \cite{dujmovic.morin.ea:structure,hickingbotham.wood:shallow}. \cref{product_structure_result} gives bounds on the odd choice number for all graphs in these classes.
 %
 %
 %
@@ -164,6 +187,8 @@ For graphs with product structure, we are able to establish stronger bounds on t
 % % \begin{thm}\label{old_result}
 % %   Let $\mathcal{H}$ be a $d$-degenerate minor closed family of graphs and let $H$ be a member of $\mathcal{H}$ with no isolated vertices.  Then $H$ has a proper odd colouring $\varphi:V(H)\to\{1,\ldots,2d+1\}$.
 % % \end{thm}
+
+In the remainder of this paper we prove \cref{layered_treewidth_result} in \cref{layered_treewidth}, explore a related notion of $(\ell,c)$-good layerings, and then prove \cref{product_structure_result} and some of its generalizations in \cref{product_structure}.
 
 \section{Layered Treewidth (Proof of \cref{layered_treewidth_result})}
 \label{layered_treewidth}
@@ -175,7 +200,7 @@ We begin with an easy observation that allows us to perform divide-and-conquer:
 \end{obs}
 
 \begin{proof}
-  Let $C_1,\ldots,C_d$ be pairwise disjoint sets of colours with $|C_i|=\odd(G[V_i])$.  For each $i\in\{1,\ldots,d\}$, let $\varphi:V_i\to C_i$ be a proper odd colouring of $G[V_i]$.  Clearly $\varphi$ is a colouring of $G$ that uses at most $\sum_{i=1}^d \odd(G[V_i])$ colours, so we only need to verify that $\varphi$ is a proper odd colouring of $G$.
+  Let $C_1,\ldots,C_d$ be pairwise disjoint sets of colours with $|C_i|=\odd(G[V_i])$.  For each $i\in\{1,\ldots,d\}$, let $\varphi_i:V_i\to C_i$ be a proper odd colouring of $G[V_i]$.  For each $i\in\{1,\ldots,d\}$ and each $v\in V_i$, let $\varphi(v):=\varphi_i(v)$.  Clearly $\varphi$ is a colouring of $G$ that uses at most $\sum_{i=1}^d \odd(G[V_i])$ colours, so we only need to verify that $\varphi$ is a proper odd colouring of $G$.
   \begin{compactitem}
     \item To see that $\varphi$ is a proper colouring of $G$, let $vw$ be an edge of $G$ with $v\in V_i$ and $w\in V_j$ for some $i,j\in\{1,\ldots,d\}$. If $i=j$ then $\varphi(v)\neq\varphi(w)$ since $\varphi$ is a proper colouring of $G[V_i]$.  If $i\neq j$, then $\varphi(v)\neq\varphi(w)$ since $\varphi(v)\in C_i$ and $\varphi(v)\in C_j$.
 
@@ -183,7 +208,7 @@ We begin with an easy observation that allows us to perform divide-and-conquer:
   \end{compactitem}
 \end{proof}
 
-A \emph{layering} $\mathcal{L}:=L_1,\ldots,L_h$ of a graph $G$ is a partition of $V(G)$ into a sequence of sets such that, for each edge $vw$ of $G$, $v\in L_i$, $w\in L_j$ implies that $|i-j|\le 1$.  For convenience, we will use the convention that $L_i:=\emptyset$ for each $i < 1$ and each $i> h$.  We say that $\mathcal{L}$ is \emph{$(\ell,c)$-good} if, for each $i\in\{1,\ldots,h\}$ and each subgraph $G'$ of $G[L_i\cup\cdots\cup L_{i+\ell-1}]$, $\odd(G')\le c$.
+A \emph{layering} of a graph $G$ is an ordered partition $\mathcal{L}:=L_1,\ldots,L_h$ of $V(G)$ such that, for each edge $vw$ of $G$, there exists an integer $i$ such that $\{v,w\}\subseteq L_i\cup L_{i+1}$.  For convenience, we will use the convention that $L_i:=\emptyset$ for each $i < 1$ and each $i> h$.  We say that $\mathcal{L}$ is \emph{$(\ell,c)$-good} if, for each integer $i$ and each subgraph $G'$ of $G[L_i\cup\cdots\cup L_{i+\ell-1}]$, $\odd(G')\le c$.
 
 
 \begin{lem}\label{four_good}
@@ -193,14 +218,17 @@ A \emph{layering} $\mathcal{L}:=L_1,\ldots,L_h$ of a graph $G$ is a partition of
 \begin{proof}
   Without loss of generality, we may assume that $G$ has no isolated vertices.
   Let $\mathcal{L}:=L_1,\ldots,L_h$ be a $(4,c)$-good layering of $G$,
-  let $X_1:=\cup\{L_i:i\bmod 4\in\{0,1\}\}$ and let $X_2:=V(G)\setminus X_1=\cup\{L_i:i\bmod 4\in\{2,3\}\}$.  Let $I_2$ be the set of isolated vertices in $G[X_2]$, let $Y_1:=X_1\cup I_2$, and let $I_1$ be the set of isolated vertices in $G[Y_1]$.  Finally, let $V_1:=Y_1\setminus I_1$ and let $V_2:=V(G)\setminus V_1=X_2\cup I_1\setminus I_2$.
+  let $X_1:=\bigcup\{L_i:i\bmod 4\in\{0,1\}\}$ and let $X_2:=V(G)\setminus X_1=\bigcup\{L_i:i\bmod 4\in\{2,3\}\}$.  Let $I_2$ be the set of isolated vertices in $G[X_2]$, let $Y_1:=X_1\cup I_2$, and let $I_1$ be the set of isolated vertices in $G[Y_1]$.  Finally, let $V_1:=Y_1\setminus I_1$ and let $V_2:=V(G)\setminus V_1=X_2\cup I_1\setminus I_2$.
 
-  We claim that, for each $i\in\{1,2\}$, $G_i:=G[V_i]$ has no isolated vertices. For $G_1$ this is obvious, since by definition $G_1$ is the subgraph obtained from $G[Y_1]$ by removing all isolated vertices.  Now consider some vertex $v$ of $G_2$. There are two cases to consider:
+  We first claim that, for each $i\in\{1,2\}$, $G_i:=G[V_i]$ has no isolated vertices. For $G_1$ this is obvious, since by definition $G_1$ is the subgraph obtained from $G[Y_1]$ by removing all isolated vertices.  Now consider an arbitrary vertex $v$ of $G_2$.
   \begin{compactenum}
     \item If $v\in X_2\setminus I_2$ then $v\not\in I_2$ so $v$ has a neighbour $w$ in $G[X_2]$.  Then $w$ is not an isolated vertex of $G[X_2]$ so $w\not\in I_2$.  Therefore $w\in V(G_2)\supseteq X_2\setminus I_2$. Therefore $vw$ is an edge of $G_2$ so $v$ is not an isolated vertex of $G_2$.
-    \item If $v\in I_1$ then, because $G$ has no isolated vertices, $v$ has a neighbour $w$ in $G$.  Since $v\in I_1$, $v$ is isolated in $G[Y_1]$ so $w\not\in Y_1= X_1\cup I_2$. Therefore $w\in V(G_2)\supseteq X_2\setminus I_2$.  Therefore $vw$ is an edge of $G_2$ so $v$ is not an isolated vertex of $G_2$.
+    % Pat had this:
+    % \item If $v\in I_1$ then, because $G$ has no isolated vertices, $v$ has a neighbour $w$ in $G$.  Since $v\in I_1$, $v$ is isolated in $G[Y_1]$ so $w\not\in Y_1= X_1\cup I_2$. Therefore $w\in V(G_2)\supseteq X_2\setminus I_2$.  Therefore $vw$ is an edge of $G_2$ so $v$ is not an isolated vertex of $G_2$.
+    % Chun-Hung suggested this:
+    \item If $v \in I_1$ then every neighbor of $v$ in $G$ is contained in $V(G) \setminus Y_1 \subseteq V(G_2)$. Since $G$ has no isolated vertices, $v$ has a neighbor in $G_2$. So $v$ is not an isolated vertex in $G_2$.
   \end{compactenum}
-  Next we claim that, for each $i\in\{1,2\}$, each connected component of $G_i$ is contained in at most four consecutive layers of $\mathcal{L}$.  Suppose, for the sake of contradiction that some component of $G_i$ contains a vertex $s\in L_j$ and a vertex $t\in L_{j+4}$ for some $j\in\{1\ldots,h-4\}$.  Then any path $P$ from $s$ to $t$ in $G_i$ contains an edge $vw$ with $v\in L_a$, $w\in L_{a+1}$ for some $a\equiv 0\bmod 4$ and also contains an edge $xy$ with $x\in L_b$ and $y\in L_{b+1}$ for some $b\equiv 2\bmod 4$.  The edge $vw$ implies that $P$ is contained in $G_1$ but the edge $xy$ implies that $P$ is contained in $G_2$, a contradiction.
+  Next we claim that, for each $i\in\{1,2\}$, each connected component of $G_i$ is contained in at most four consecutive layers of $\mathcal{L}$.  Suppose to the contrary that some component of $G_i$ contains a vertex $s\in L_j$ and a vertex $t\in L_{j'}$ for some integers $j$ and $j'$ with $j'\ge j+4$.  Then any path $P$ from $s$ to $t$ in $G_i$ contains an edge $vw$ with $v\in L_a$, $w\in L_{a+1}$ for some $a\equiv 0\pmod 4$ and also contains an edge $xy$ with $x\in L_b$ and $y\in L_{b+1}$ for some $b\equiv 2\pmod 4$.  The edge $vw$ implies that $P$ is contained in $G_1$ but the edge $xy$ implies that $P$ is contained in $G_2$, a contradiction.
 
   Therefore, for each $i\in\{1,2\}$, each component of $G_i$ is a subgraph of $G[L_j\cup\cdots\cup L_{j+3}]$ for some $j\in\{1,\ldots,h-3\}$.  Since $G$ is $(4,c)$-good, this implies that $\odd(G_i)\le c$.  Therefore, by \cref{partition}, $\odd(G)\le \odd(G_1)+\odd(G_2)\le 2c$.
 \end{proof}
@@ -209,10 +237,26 @@ With \cref{four_good} in hand, we can now easily prove \cref{layered_treewidth_r
 
 A \emph{tree decomposition} $\mathcal{T}:=(B_x:x\in V(T))$ of a graph $G$ is a sequence of subsets of $V(G)$ called \emph{bags} that are indexed by the nodes of a tree $T$ and such that,
 \begin{inparaenum}[(i)]
-  \item for each vertex $v$ of $G$, $T[x\in V(T):v\in B_x]$ is connected; and
+  \item for each vertex $v$ of $G$, $T[x\in V(T):v\in B_x]$ is a connected graph with at least one vertex; and
   \item for each edge $vw$ of $G$, ther exists a node $x$ of $T$ such that $\{v,w\}\subseteq B_x$.
 \end{inparaenum}
 The \emph{width} of a tree decomposition is equal to the size of its largest bag, minus $1$.  The \emph{treewidth} of $G$ is the minimum width of any tree decomposition of $G$.
+
+\todo[inline]{
+Chun-Hung suggests the following changes.
+
+24. In the paragraph that defines the layered treewidth: I would replace
+the entire paragraph by "The {\it layered treewidth} of a graph $G$ is
+$\max\{|V \cap B|: V \in {\mathcal L}, B \in {\mathcal T}\}$ over all
+layerings ${\mathcal L}$ of $G$ and tree-decompositions ${\mathcal T}$
+of $G$."
+
+25. In the proof of Theorem 2: Replace the first sentence by "Let
+${\mathcal L}:=(V_1,V_2,...,V_h)$ be a layering of $G$ and ${\mathcal
+T}:=(B_x: x \in V(T))$ be a tree-decomposition of $G$ such that
+$\max\{|V_j \cap B_x|: j \in \{1,2,...,h\}, x \in V(T)\} \leq t$. Then
+..."
+}
 
 A \emph{layered tree decomposition} of $G$ is a pair $(\mathcal{L},\mathcal{T})$ where $\mathcal{L}:=V_0,\ldots,V_h$ is a layering of $G$ and $\mathcal{T}:=(B_x:x\in V(T))$ is a tree decomposition of $G$.  The \emph{layered width} of $(\mathcal{L},\mathcal{T})$ is $\max\{|L_j\cap B_x|:j,x\in\{0,\ldots,h\}\times V(T)\}$.  The \emph{layered treewidth} of $G$ is the minimum layered width of any layered tree decomposition of $G$.
 
